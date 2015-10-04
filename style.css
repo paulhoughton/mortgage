@@ -1,0 +1,25 @@
+.navbar {
+	background-color: #428bca;
+}
+
+.navbar .navbar-brand {
+	color: #ffffff;
+}
+
+input {
+	width:80px;
+	margin-right:10px;
+}
+
+label {
+	width:80px;
+}
+
+th,td {
+	padding: 0 8px 0 8px;
+	text-align: right
+}
+
+.money {
+	color: #428bca;
+}
