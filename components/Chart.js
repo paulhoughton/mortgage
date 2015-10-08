@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
-import ReactDom from 'react-dom';
-import '!style!css!./chart.css';
+import '!style!css!./Chart.css';
 
 const margin = {top: 20, right: 20, bottom: 30, left: 75},
-	width = 800 - margin.left - margin.right,
-	height = 300 - margin.top - margin.bottom;
+	fullWidth = 800,
+	fullHeight = 300,
+	width = fullWidth - margin.left - margin.right,
+	height = fullHeight - margin.top - margin.bottom;
 
 export default class Chart extends Component {
 
     render() {
-		return (<svg></svg>)
+		return (<svg ref="chart"></svg>)
 	}
 
 	shouldComponentUpdate(props){
@@ -18,10 +19,10 @@ export default class Chart extends Component {
 	}
 
 	componentDidMount() {
-		d3.select(ReactDom.findDOMNode(this))
+		d3.select(this.refs.chart)
 			.attr("width", "100%")
-			.attr("height", height + margin.top + margin.bottom)
-			.attr('viewBox','0 0 '+(width + margin.left + margin.right) +' '+(height + margin.top + margin.bottom))
+			.attr("height", fullHeight)
+			.attr('viewBox',`0 0 ${fullWidth} ${fullHeight}`)
 			.attr('preserveAspectRatio','xMidYMid')
 			.append("g")
 			.attr("transform", `translate(${margin.left},${margin.top})`);
@@ -30,7 +31,7 @@ export default class Chart extends Component {
 	}	
 	
 	redraw({data}) {
-		var svg = d3.select(ReactDom.findDOMNode(this)).select("g");
+		var svg = d3.select(this.refs.chart).select("g");
 
 		var x = d3.scale.linear()
 			.range([0, width]);

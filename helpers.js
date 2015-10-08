@@ -3,7 +3,7 @@ export function calculatePayments(initial, years, rate, monthlyOverpayment, over
     let balance = initial;
 	let baseline = initial;
     let payments = [{overpayment:0, balance, baseline}];
-    let monthlyPayment = (initial * monthlyRatePct / (1 - (Math.pow(1/(1 + monthlyRatePct), years * 12)))).toFixed(2);
+    let monthlyPayment = (initial * monthlyRatePct / (1 - (Math.pow(1/(1 + monthlyRatePct), years * 12))));
 	let partial;
 	
     for (let year=1; year<=years; year++) {
@@ -21,6 +21,6 @@ export function calculatePayments(initial, years, rate, monthlyOverpayment, over
 		payments.push({baseline, interestYearly, overpayment:overpayment+(monthlyOverpayment *12), balance, partial});
 		if (partial) partial=0;
     }
-    return {monthlyPayment, payments};
+    return {monthlyPayment:monthlyPayment.toFixed(2), payments};
 };
 
