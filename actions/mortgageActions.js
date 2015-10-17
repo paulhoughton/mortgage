@@ -16,8 +16,12 @@ export function setMonthlyOverpayment(val) {
   return { type: types.SET_MONTHLY_OVERPAYMENT, val };
 }
 
-export function addOverpayment(year, amount) {
-  return { type: types.ADD_OVERPAYMENT, year, amount };
+export function addOverpayment() {
+  return { type: types.ADD_OVERPAYMENT };
+}
+
+export function updateOverpayment(index, field, value) {
+  return { type: types.UPDATE_OVERPAYMENT, index, field, value };
 }
 
 export function deleteOverpayment(val) {

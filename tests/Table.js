@@ -20,14 +20,14 @@ test("Table test", function (assert) {
 	assert.equal(tableComponent.type, "table", "should create a table");
 	const tbody=tableComponent.props.children[1];
 	const rows=tbody.props.children;
-	assert.equal(rows.length, 4, "should have correct number of rows");
-	const secondRow=rows[1].props.children;
+	assert.equal(rows.length, 3, "should have correct number of rows");
+	const firstRow=rows[0].props.children;
 	
-	assert.equal(secondRow.length, 4, "should have 4 cells");
-	assert.equal(secondRow[0].props.children,1,"should display correct year")
-	assert.equal(secondRow[1].props.children,8561,"should display interest correcly")
-	assert.equal(secondRow[2].props.children,0,"should display overpayments")
-	assert.equal(secondRow[3].props.children,136631,"should display the balance")
+	assert.equal(firstRow.length, 4, "should have 4 cells");
+	assert.equal(firstRow[0].props.children,1,"should display correct year")
+	assert.equal(firstRow[1].props.children,8561,"should display interest correcly")
+	assert.equal(firstRow[2].props.children,0,"should display overpayments")
+	assert.equal(firstRow[3].props.children,136631,"should display the balance")
 	
 	assert.end();
 });
@@ -43,9 +43,9 @@ test("Table test - early completion", function (assert) {
 
 	const tbody=tableComponent.props.children[1];
 	const rows=tbody.props.children;
-	assert.equal(rows.length, 4, "should exclude empty rows");
+	assert.equal(rows.length, 3, "should exclude empty rows");
 	
-	const completionRow=rows[3].props.children;
+	const completionRow=rows[2].props.children;
 	assert.equal(completionRow[0].props.children, "10m", "should display completion month");
 	assert.end();
 });

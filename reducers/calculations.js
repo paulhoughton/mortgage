@@ -1,11 +1,11 @@
-import { SET_INITIAL, SET_RATE, SET_YEARS, SET_MONTHLY_OVERPAYMENT, ADD_OVERPAYMENT, DELETE_OVERPAYMENT } from '../constants/ActionTypes';
+import { SET_INITIAL, SET_RATE, SET_YEARS, SET_MONTHLY_OVERPAYMENT, ADD_OVERPAYMENT, DELETE_OVERPAYMENT, UPDATE_OVERPAYMENT } from '../constants/ActionTypes';
 
 const initialState = {
 	initial: 200000,
 	rate:5,
 	years:25,
 	monthlyOverpayment:0,
-	overpayments:[]
+	overpayments:[{year:0, month:1, amount:0}]
 };
 
 export default function calculations(state = initialState, action) {
@@ -34,7 +34,15 @@ export default function calculations(state = initialState, action) {
   case ADD_OVERPAYMENT:
     return {
 		...state,
-		overpayments:state.overpayments.concat({year:+action.year, amount:+action.amount})
+		overpayments:state.overpayments.concat({year:0, month:1, amount:0})
+	}
+  case UPDATE_OVERPAYMENT:
+    return {
+		...state,
+		overpayments:state.overpayments.map((item, i)=>action.index===i ? 
+			Object.assign({}, item, {[action.field]: action.value}):
+			item
+		)
 	}
 	case DELETE_OVERPAYMENT:
 	return {

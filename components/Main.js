@@ -21,7 +21,7 @@ export default class MainSection extends Component {
             <Overpayment {...this.props} />
           </div>
           <div className="col-sm-12">
-            <h2>Monthly Payment:
+            <h2>Monthly Payment
               <span className="money"> {(+monthlyPayment + monthlyOverpayment).toFixed(2)}</span>
             </h2>
             <Chart data={payments} />

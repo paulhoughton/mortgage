@@ -6,13 +6,9 @@
 	color: #ffffff;
 }
 
-input {
-	width:80px;
-	margin-right:10px;
-}
-
-label {
-	width:80px;
+input,select,label {
+	width:70px;
+	margin-right:5px;
 }
 
 th,td {
