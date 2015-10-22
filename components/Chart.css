@@ -5,11 +5,6 @@
   shape-rendering: crispEdges;
 }
 
-.axis 
-.x.axis path {
-  display: none;
-}
-
 .line {
   fill: none;
   stroke: #428bca;
