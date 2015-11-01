@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import {calculatePayments} from '../helpers';
-import Table from './Table';
+import React from 'react';
+import {calculatePayments} from '../helpers/mortgage';
+import TableMortgage from './TableMortgage';
 import Chart from './Chart';
 import BaseFigures from './BaseFigures';
 import Overpayment from './Overpayment';
@@ -27,7 +27,7 @@ export default (props)=> {
           </div>
         </div>
         <div className="col-sm-4">
-          <Table data={payments}/>
+          <TableMortgage data={payments}/>
         </div>
       </div>
     )

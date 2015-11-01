@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 export default ({actions, monthlyOverpayment, overpayments, years })=> {
   const setMonthlyOverpayment=(event)=>{

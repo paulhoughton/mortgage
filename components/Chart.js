@@ -93,7 +93,6 @@ export default class Chart extends Component {
 		svg.append("path")
 			.datum(data)
 			.attr("class", "line baseline")
-			.style("stroke-dasharray", ("4, 4"))
 			.attr("d", baseline);
 		
 		svg.append("path")

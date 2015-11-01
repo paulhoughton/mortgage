@@ -1,8 +1,7 @@
 import test from "tape";
-import {calculatePayments} from '../helpers';
+import {calculatePayments} from '../helpers/mortgage';
 
 test("200000 for 25 years @ 5%", function (assert) {
-//	const result = calculatePayments(initial, years, rate, monthlyOverpayment, overpayments=[]);
 	const {monthlyPayment, payments} = calculatePayments(200000, 25, 5, 0);
 
 	assert.equal(Math.floor(payments[0].balance), 200000, "should have initial 200000 balance");
@@ -14,7 +13,6 @@ test("200000 for 25 years @ 5%", function (assert) {
 });
 
 test("300000 for 30 years @ 2.5%", function (assert) {
-//	const result = calculatePayments(initial, years, rate, monthlyOverpayment, overpayments=[]);
 	const {monthlyPayment, payments} = calculatePayments(300000, 30, 2.5, 0);
 
 	assert.equal(Math.floor(payments[0].balance), 300000, "should have initial 200000 balance");
