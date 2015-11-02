@@ -22,8 +22,8 @@ export default ({actions, monthlyOverpayment, overpayments, years })=> {
       </div>
       {overpayments.map((payment, i)=>(
         <div key={i}>
-          <input type="text" type="number" min="0" max={years} value={payment.year} onChange={updateOverpayment.bind(this, i, "year")} />
-          <input type="text" type="number" min="1" max="12" value={payment.month} onChange={updateOverpayment.bind(this, i, "month")} />
+          <input type="number" min="0" max={years} value={payment.year} onChange={updateOverpayment.bind(this, i, "year")} />
+          <input type="number" min="1" max="12" value={payment.month} onChange={updateOverpayment.bind(this, i, "month")} />
           <input type="text" value={payment.amount} onChange={updateOverpayment.bind(this, i, "amount")} />
           
           {i===overpayments.length-1 ?
