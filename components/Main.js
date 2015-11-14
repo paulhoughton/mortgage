@@ -13,12 +13,8 @@ export default (props)=> {
     return (
       <div className="container-fluid">
         <div className="col-md-8 col-sm-12">
-          <div className="col-sm-4">
-            <BaseFigures {...props} />
-          </div>
-          <div className="col-sm-8">
-            <Overpayment {...props} />
-          </div>
+          <BaseFigures className="col-sm-4" {...props} />
+          <Overpayment className="col-sm-8" {...props} />
           <div className="col-sm-12">
             <h2>Monthly Payment
               <span className="money"> {(+monthlyPayment + monthlyOverpayment).toFixed(2)}</span>
@@ -26,9 +22,7 @@ export default (props)=> {
             <Chart data={payments} />
           </div>
         </div>
-        <div className="col-sm-4">
-          <TableMortgage data={payments}/>
-        </div>
+        <TableMortgage className="col-sm-4" data={payments} />
       </div>
     )
 }

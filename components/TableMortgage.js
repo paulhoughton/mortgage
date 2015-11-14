@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from './Table';
 
-export default ({data})=> {
+export default ({data, className})=> {
 	let output=data.slice(1)
 		.filter(year=>year.balance>0 || year.interestYearly>0)
 		.reduce((acc, year, index) => {
@@ -16,7 +16,7 @@ export default ({data})=> {
 			}
 		}, {interestTotal:0, overpaymentTotal:0, rows:[]});
 
-	return <Table
+	return <Table className={className}
 			headings={["Years", "Interest", "Overpayment", "Balance"]}
 			rows={output.rows}
 			totals={[" ",Math.round(output.interestTotal), Math.round(output.overpaymentTotal)," "]} />;

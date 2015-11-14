@@ -2,8 +2,8 @@ import React from 'react';
 
 const border="#428bca solid 1px";
 
-export default ({headings, rows, totals})=> (
-	<table>
+export default ({headings, rows, totals, className})=> (
+	<table className={className}>
 		<thead>
 			<tr style={{borderBottom:border}}>
 				{headings.map((d,i)=><th key={i}>{d}</th>)}
