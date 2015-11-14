@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '!style!css!./Chart.css';
 
-const margin = {top: 20, right: 20, bottom: 30, left: 75},
+const margin = {top: 20, right: 20, bottom: 20, left: 80},
 	fullWidth = 800,
 	fullHeight = 300,
 	width = fullWidth - margin.left - margin.right,
@@ -9,7 +9,7 @@ const margin = {top: 20, right: 20, bottom: 30, left: 75},
 	
 const ANIM_SPEED=250;
 
-const x= d3.scale.linear()
+const x = d3.scale.linear()
 			.range([0, width]);
 
 const y = d3.scale.linear()
@@ -34,39 +34,42 @@ const yAxis = d3.svg.axis()
 
 export default class Chart extends Component {
 
-    render() {
+	render() {
 		return (<svg ref="chart"></svg>)
 	}
-
+	
 	shouldComponentUpdate({data}){
-		  x.domain([0,data.length-1])
-		  y.domain([0,data[0].balance]);
-		  xAxis.ticks(Math.min(data.length,30))
+		x.domain([0,data.length-1])
+		y.domain([0,data[0].balance]);
+		xAxis.ticks(Math.min(data.length,30))
+		
+		var svg=d3.select(this.refs.chart)
+			.select("g")
+			.transition();
 
-		var svg=d3.select(this.refs.chart).select("g").transition();
-        svg.select(".overpayline")
-            .duration(ANIM_SPEED)
-            .attr("d", line(data));
-
-        svg.select(".baseline")
-            .duration(ANIM_SPEED)
-            .attr("d", baseline(data));
-
-        svg.select(".x.axis")
-            .duration(ANIM_SPEED)
-            .call(xAxis);
-			
-        svg.select(".y.axis")
-            .duration(ANIM_SPEED)
-            .call(yAxis);
-
+		svg.select(".overpayline")
+			.duration(ANIM_SPEED)
+			.attr("d", line(data));
+		
+		svg.select(".baseline")
+			.duration(ANIM_SPEED)
+			.attr("d", baseline(data));
+		
+		svg.select(".x.axis")
+			.duration(ANIM_SPEED)
+			.call(xAxis);
+		
+		svg.select(".y.axis")
+			.duration(ANIM_SPEED)
+			.call(yAxis);
+		
 		return false;
 	}
 
 	componentDidMount() {
 		d3.select(this.refs.chart)
 			.attr("width", "100%")
-			.attr("height", fullHeight)
+			.attr("height", "100%")
 			.attr('viewBox',`0 0 ${fullWidth} ${fullHeight}`)
 			.attr('preserveAspectRatio','xMidYMid')
 			.append("g")
@@ -75,8 +78,7 @@ export default class Chart extends Component {
 		var {data} = this.props;
 
 		var svg = d3.select(this.refs.chart).select("g");
-		
-		
+			
 		x.domain([0,data.length-1])
 		y.domain([0,data[0].balance]);
 		xAxis.ticks(Math.min(data.length,30))
