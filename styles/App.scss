@@ -1,0 +1,26 @@
+@import "./_variables.scss";
+
+.navbar {
+	background-color: $primary;
+	.navbar-brand {
+		color: $secondary;
+	}
+}
+
+input,select,label {
+	width:70px;
+	margin-right:5px;
+}
+
+th,td {
+	padding: 0 7px;
+	text-align: right
+}
+
+.money {
+	color: $primary;
+}
+
+tbody,tfoot tr:first-child {
+	border-top: $primary solid 1px;
+}

@@ -1,23 +1,24 @@
 import React from 'react';
 
-const border="#428bca solid 1px";
-
 export default ({headings, rows, totals, className})=> (
 	<table className={className}>
 		<thead>
-			<tr style={{borderBottom:border}}>
+			<tr>
 				{headings.map((d,i)=><th key={i}>{d}</th>)}
 			</tr>
 		</thead>
 		<tbody>
-			{rows.map((row,index)=>{
-				return (<tr key={index}>
-					{row.map((d,i)=><td key={i}>{d}</td>)}
-				</tr>)})
+			{rows.map((row,index)=>(
+					<tr key={index}>
+						{row.map((d,i)=><td key={i}>{d}</td>)}
+					</tr>)
+				)
 			}
-			<tr style={{borderTop:border}}>
+		</tbody>
+		<tfoot>
+			<tr>
 				{totals.map((d,i)=><td key={i}>{d}</td>)}
 			</tr>
-		</tbody>
+		</tfoot>
 	</table>
 );

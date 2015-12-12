@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Main from '../components/Main';
 import * as MortgageActions from '../actions/mortgageActions';
+import '../Styles/App.scss';
 
 class App extends Component {
   render() {
