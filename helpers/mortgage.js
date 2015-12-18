@@ -1,4 +1,4 @@
-export function calculatePayments(initial, years, rate, monthlyOverpayment, overpayments=[]) {
+export function calculatePayments({initial, years, rate, monthlyOverpayment, overpayments=[]}) {
     let monthlyRatePct = rate / 1200;
     let balance = initial;
     let baseline = initial;

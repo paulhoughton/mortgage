@@ -1,29 +1,29 @@
 import * as types from '../constants/ActionTypes';
 
-export function setInitial(val) {
-  return { type: types.SET_INITIAL, val };
+export function setInitial(event) {
+  return { type: types.SET_INITIAL, val:event.target.value };
 }
 
-export function setYears(val) {
-  return { type: types.SET_YEARS, val };
+export function setYears(event) {
+  return { type: types.SET_YEARS, val:event.target.value };
 }
 
-export function setRate(val) {
-  return { type: types.SET_RATE, val };
+export function setRate(event) {
+  return { type: types.SET_RATE, val:event.target.value };
 }
 
-export function setMonthlyOverpayment(val) {
-  return { type: types.SET_MONTHLY_OVERPAYMENT, val };
+export function setMonthlyOverpayment(event) {
+  return { type: types.SET_MONTHLY_OVERPAYMENT, val:event.target.value };
 }
 
 export function addOverpayment() {
   return { type: types.ADD_OVERPAYMENT };
 }
 
-export function updateOverpayment(index, field, value) {
-  return { type: types.UPDATE_OVERPAYMENT, index, field, value };
+export function updateOverpayment(index, field, event) {
+  return { type: types.UPDATE_OVERPAYMENT, index, field, val:event.target.value };
 }
 
-export function deleteOverpayment(val) {
-  return { type: types.DELETE_OVERPAYMENT, val };
+export function deleteOverpayment(index) {
+  return { type: types.DELETE_OVERPAYMENT, index };
 }

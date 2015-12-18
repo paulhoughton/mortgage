@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import calculations from './calculations';
+import mortgage from './mortgage';
+import overpayments from './overpayments';
 
 const rootReducer = combineReducers({
-  calculations
+  mortgage,
+  overpayments
 });
 
 export default rootReducer;

@@ -6,7 +6,7 @@ import {shallowRender} from "../helpers/test";
 
 test("Table Mortgage test", function (assert) {
 	const props = {
-		data:[
+		payments:[
 			{balance:200000, interestYearly:0, overpayment:0 },
 			{balance:136631, interestYearly:8561, overpayment:0 },
 			{balance:70019, interestYearly:5319, overpayment:0 },
@@ -30,7 +30,7 @@ test("Table Mortgage test", function (assert) {
 test("Table Mortgage test - early completion", function (assert) {
 
 	const props = {
-		data:[
+		payments:[
 			{balance:200000, interestYearly:0, overpayment:6000 },
 			{balance:130491, interestYearly:8421, overpayment:6000 },
 			{balance:57426, interestYearly:4865, overpayment:6000 },
@@ -50,7 +50,7 @@ test("Table Mortgage test - early completion", function (assert) {
 
 test("Table Mortgage test - no data", function (assert) {
 	const props = {
-		data:[]
+		payments:[]
 	}
 
 	const tableMortgage = shallowRender(<TableMortgage {...props}/>);

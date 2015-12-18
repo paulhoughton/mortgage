@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../Styles/Chart.scss';
+import '../styles/Chart.scss';
 
 const margin = {top: 20, right: 20, bottom: 20, left: 80},
 	fullWidth = 800,

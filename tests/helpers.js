@@ -2,7 +2,7 @@ import test from "tape";
 import {calculatePayments} from '../helpers/mortgage';
 
 test("200000 for 25 years @ 5%", function (assert) {
-	const {monthlyPayment, payments} = calculatePayments(200000, 25, 5, 0);
+	const {monthlyPayment, payments} = calculatePayments({initial:200000, years:25, rate:5, monthlyOverpayment: 0});
 
 	assert.equal(Math.floor(payments[0].balance), 200000, "should have initial 200000 balance");
 	assert.equal(payments.length, 26, "should have 25 payments plus inital");
@@ -13,7 +13,7 @@ test("200000 for 25 years @ 5%", function (assert) {
 });
 
 test("300000 for 30 years @ 2.5%", function (assert) {
-	const {monthlyPayment, payments} = calculatePayments(300000, 30, 2.5, 0);
+	const {monthlyPayment, payments} = calculatePayments({initial:300000, years:30, rate:2.5, monthlyOverpayment: 0})
 
 	assert.equal(Math.floor(payments[0].balance), 300000, "should have initial 200000 balance");
 	assert.equal(payments.length, 31, "should have 30 payments plus inital");
@@ -24,7 +24,7 @@ test("300000 for 30 years @ 2.5%", function (assert) {
 });
 
 test("200000 for 25 years @ 5% overpaying 50", function (assert) {
-	const {monthlyPayment, payments} = calculatePayments(200000, 25, 5, 50);
+	const {monthlyPayment, payments} = calculatePayments({initial:200000, years:25, rate:5, monthlyOverpayment: 50});
 
 	assert.equal(Math.floor(payments[0].balance), 200000, "should have initial 200000 balance");
 	assert.equal(payments.length, 26, "should have 25 payments plus inital");

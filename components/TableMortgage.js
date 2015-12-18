@@ -1,8 +1,8 @@
 import React from 'react';
 import Table from './Table';
 
-export default ({data, className})=> {
-	let output=data.slice(1)
+export default ({payments, className})=> {
+	let output=payments.slice(1)
 		.filter(year=>year.balance>0 || year.interestYearly>0)
 		.reduce((acc, year, index) => {
 			return {
