@@ -1,4 +1,3 @@
-import React, {Component} from 'react';
 import '../styles/Chart.scss';
 
 const margin = {top: 20, right: 20, bottom: 20, left: 80},
@@ -32,7 +31,7 @@ const yAxis = d3.svg.axis()
 			.orient("left");
 
 
-export default class Chart extends Component {
+export default class Chart extends React.Component {
 
 	render() {
 		return (<svg ref="chart"></svg>)

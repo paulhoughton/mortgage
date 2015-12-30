@@ -1,4 +1,3 @@
-import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
@@ -7,7 +6,7 @@ import * as MortgageActions from '../actions/mortgageActions';
 import {calculatePayments} from '../helpers/mortgage';
 import '../styles/App.scss';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     const { mortgage, overpayments, dispatch } = this.props;
     const actions = bindActionCreators(MortgageActions, dispatch);

@@ -4,33 +4,31 @@
   "description": "Mortgage overpayment calculator",
   "scripts": {
     "start": "node server.js",
-    "test": "node node_modules/babel-tape-runner/bin/babel-tape-runner tests/*.js"
+    "test": "webpack --config webpack.config.tests.js"
   },
   "license": "MIT",
   "dependencies": {
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3",
-    "react-redux": "^4.0.1",
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5",
+    "react-redux": "^4.0.6",
     "redux": "^3.0.5"
   },
   "devDependencies": {
-    "babel-core": "^6.3.21",
+    "babel-core": "^6.3.26",
     "babel-loader": "^6.2.0",
-    "babel-plugin-react-transform": "^2.0.0-beta1",
     "babel-polyfill": "^6.3.14",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
+    "babel-preset-react-hmre": "^1.0.1",
     "babel-preset-stage-0": "^6.3.13",
-    "babel-tape-runner": "^2.0.0",
-    "css-loader": "^0.23.0",
+    "css-loader": "^0.23.1",
     "express": "^4.13.3",
     "node-sass": "^3.4.2",
-    "react-addons-test-utils": "^0.14.3",
-    "react-transform-catch-errors": "^1.0.0",
-    "react-transform-hmr": "^1.0.1",
+    "react-addons-test-utils": "^0.14.5",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
-    "tape": "^4.2.1",
+    "tap-webpack-plugin": "^1.0.0",
+    "tape": "^4.4.0",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"

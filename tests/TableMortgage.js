@@ -1,5 +1,3 @@
-import test from "tape";
-import React from 'react';
 import TableMortgage from '../components/TableMortgage';
 
 import {shallowRender} from "../helpers/test";

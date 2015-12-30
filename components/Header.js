@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default ({title})=> (
   <nav className="navbar navbar-default">
     <div className="container-fluid">

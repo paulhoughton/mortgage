@@ -1,5 +1,3 @@
-import test from "tape";
-import React from 'react';
 import Header from '../components/Header';
 
 import {shallowRender} from "../helpers/test";

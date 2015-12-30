@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default ({headings, rows, totals, className})=> (
 	<table className={className}>
 		<thead>

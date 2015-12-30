@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default ({actions, monthlyOverpayment, overpayments, years, className })=> (
   <div className={className}>
     <div>

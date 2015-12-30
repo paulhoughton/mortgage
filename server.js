@@ -2,6 +2,19 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var config = require('./webpack.config');
+var testConfig = require('./webpack.config.tests');
+
+webpack(testConfig).watch({}, function(err, stats) {
+    console.log(stats.hasErrors()?
+        stats.toString({
+            assets: false,
+            version: false,
+            hash: false,
+            timings: false,
+            chunks: false,
+            colors:true}):
+        "Tests passed")
+});
 
 var app = new require('express')();
 var port = 3000;
