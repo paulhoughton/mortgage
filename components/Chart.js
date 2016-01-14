@@ -1,104 +1,56 @@
 import '../styles/Chart.scss';
+import { select }  from 'd3-selection';
+import { line, basisClosed } from 'd3-shape';
+import { scaleLinear } from 'd3-scale';
+import { axisBottom, axisLeft }  from 'd3-axis';
 
 const margin = {top: 20, right: 20, bottom: 20, left: 80},
 	fullWidth = 800,
 	fullHeight = 300,
 	width = fullWidth - margin.left - margin.right,
 	height = fullHeight - margin.top - margin.bottom;
+
+const x = scaleLinear()
+    .range([0, width]);
+    
+const y = scaleLinear()
+    .range([0, height]);
+
+const lineGenerator = line()
+    .x((d,i)=>x(i+((d.partial/12)||1)-1))
+    .y(d=>y(d.balance));
+    
+const baselineGenerator = line()
+    .x((d,i)=>x(i))
+    .y(d=>y(d.baseline)); 
 	
-const ANIM_SPEED=250;
-
-const x = d3.scale.linear()
-			.range([0, width]);
-
-const y = d3.scale.linear()
-			.range([height, 0]);
-			
-const line = d3.svg.line()
-			.x((d,i)=>x(i+((d.partial/12)||1)-1))
-			.y(d=>y(d.balance));
-
-const baseline = d3.svg.line()
-			.x((d,i)=>x(i))
-			.y(d=>y(d.baseline));		
-
-const xAxis = d3.svg.axis()
-			.scale(x)
-			.orient("bottom");
-
-const yAxis = d3.svg.axis()
-			.scale(y)
-			.orient("left");
-
-
 export default class Chart extends React.Component {
-
 	render() {
-		return (<svg ref="chart"></svg>)
-	}
-	
-	shouldComponentUpdate({data}){
-		x.domain([0,data.length-1])
-		y.domain([0,data[0].balance]);
-		xAxis.ticks(Math.min(data.length,30))
-		
-		var svg=d3.select(this.refs.chart)
-			.select("g")
-			.transition();
+        const {data}=this.props;
+        x.domain([0,data.length-1]);
+        y.domain([data[0].balance,0]);
 
-		svg.select(".overpayline")
-			.duration(ANIM_SPEED)
-			.attr("d", line(data));
-		
-		svg.select(".baseline")
-			.duration(ANIM_SPEED)
-			.attr("d", baseline(data));
-		
-		svg.select(".x.axis")
-			.duration(ANIM_SPEED)
-			.call(xAxis);
-		
-		svg.select(".y.axis")
-			.duration(ANIM_SPEED)
-			.call(yAxis);
-		
-		return false;
+		return (<svg height={"100%"} 
+                    width={"100%"} 
+                    viewBox={`0 0 ${fullWidth} ${fullHeight}`}>
+                    <g transform={`translate(${margin.left},${margin.top})`}>
+                        <g className="axis" ref={r=>{this.xAxis=select(r)}} transform={`translate(0, ${height})`}></g>
+                        <g className="axis" ref={r=>{this.yAxis=select(r)}}></g>
+                        <path className="line baseline" d={baselineGenerator(data)}></path>
+                        <path className="line" d={lineGenerator(data)}></path>
+                    </g>
+                </svg>);
 	}
-
 	componentDidMount() {
-		d3.select(this.refs.chart)
-			.attr("width", "100%")
-			.attr("height", "100%")
-			.attr('viewBox',`0 0 ${fullWidth} ${fullHeight}`)
-			.attr('preserveAspectRatio','xMidYMid')
-			.append("g")
-			.attr("transform", `translate(${margin.left},${margin.top})`);
-
-		var {data} = this.props;
-
-		var svg = d3.select(this.refs.chart).select("g");
-			
-		x.domain([0,data.length-1])
-		y.domain([0,data[0].balance]);
-		xAxis.ticks(Math.min(data.length,30))
-
-		svg.append("g")
-			.attr("class", "x axis")
-			.attr("transform", `translate(0,${height})`)
-			.call(xAxis);
-		
-		svg.append("g")
-			.attr("class", "y axis")
-			.call(yAxis)
-				
-		svg.append("path")
-			.datum(data)
-			.attr("class", "line baseline")
-			.attr("d", baseline);
-		
-		svg.append("path")
-			.datum(data)
-			.attr("class", "line overpayline")
-			.attr("d", line);
-	}	
+        this.drawAxis();
+    }
+	componentDidUpdate(prevProps) {
+        if ((prevProps.data.length!==this.props.data.length) || 
+            (prevProps.data[0].balance!==this.props.data[0].balance))
+                this.drawAxis();
+    }
+    drawAxis() {
+        this.xAxis.call(axisBottom().scale(x).ticks(Math.min(this.props.data.length,30)))
+        this.yAxis.call(axisLeft().scale(y))
+    }    
 };
