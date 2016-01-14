@@ -1,6 +1,6 @@
 import '../styles/Chart.scss';
 import { select }  from 'd3-selection';
-import { line, basisClosed } from 'd3-shape';
+import { line } from 'd3-shape';
 import { scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft }  from 'd3-axis';
 
