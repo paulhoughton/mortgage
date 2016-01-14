@@ -12,39 +12,39 @@ const margin = {top: 20, right: 20, bottom: 20, left: 80},
 
 const x = scaleLinear()
     .range([0, width]);
-    
+
 const y = scaleLinear()
     .range([0, height]);
 
 const lineGenerator = line()
     .x((d,i)=>x(i+((d.partial/12)||1)-1))
     .y(d=>y(d.balance));
-    
+
 const baselineGenerator = line()
     .x((d,i)=>x(i))
     .y(d=>y(d.baseline)); 
-	
+
 export default class Chart extends React.Component {
-	render() {
+    render() {
         const {data}=this.props;
         x.domain([0,data.length-1]);
         y.domain([data[0].balance,0]);
 
-		return (<svg height={"100%"} 
-                    width={"100%"} 
-                    viewBox={`0 0 ${fullWidth} ${fullHeight}`}>
-                    <g transform={`translate(${margin.left},${margin.top})`}>
-                        <g className="axis" ref={r=>{this.xAxis=select(r)}} transform={`translate(0, ${height})`}></g>
-                        <g className="axis" ref={r=>{this.yAxis=select(r)}}></g>
-                        <path className="line baseline" d={baselineGenerator(data)}></path>
-                        <path className="line" d={lineGenerator(data)}></path>
-                    </g>
-                </svg>);
-	}
-	componentDidMount() {
+        return (<svg height={"100%"} 
+            width={"100%"} 
+            viewBox={`0 0 ${fullWidth} ${fullHeight}`}>
+            <g transform={`translate(${margin.left},${margin.top})`}>
+                <g className="axis" ref={r=>{this.xAxis=select(r)}} transform={`translate(0, ${height})`}></g>
+                <g className="axis" ref={r=>{this.yAxis=select(r)}}></g>
+                <path className="line baseline" d={baselineGenerator(data)}></path>
+                <path className="line" d={lineGenerator(data)}></path>
+            </g>
+        </svg>);
+    }
+    componentDidMount() {
         this.drawAxis();
     }
-	componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         if ((prevProps.data.length!==this.props.data.length) || 
             (prevProps.data[0].balance!==this.props.data[0].balance))
                 this.drawAxis();
