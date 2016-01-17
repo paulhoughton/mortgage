@@ -30,8 +30,9 @@ export default class Chart extends React.Component {
         x.domain([0,data.length-1]);
         y.domain([data[0].balance,0]);
 
-        return (<svg height={"100%"} 
-            width={"100%"} 
+        return (<svg 
+            height="100%" 
+            width="100%"
             viewBox={`0 0 ${fullWidth} ${fullHeight}`}>
             <g transform={`translate(${margin.left},${margin.top})`}>
                 <g className="axis" ref={r=>{this.xAxis=select(r)}} transform={`translate(0, ${height})`}></g>
@@ -50,7 +51,7 @@ export default class Chart extends React.Component {
                 this.drawAxis();
     }
     drawAxis() {
-        this.xAxis.call(axisBottom().scale(x).ticks(Math.min(this.props.data.length,30)))
-        this.yAxis.call(axisLeft().scale(y))
+        this.xAxis.call(axisBottom().scale(x).ticks(Math.min(this.props.data.length,30)));
+        this.yAxis.call(axisLeft().scale(y));
     }    
 };
