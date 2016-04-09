@@ -8,14 +8,14 @@ export default ({headings, rows, totals, className})=> (
 		<tbody>
 			{rows.map((row,index)=>(
 					<tr key={index}>
-						{row.map((d,i)=><td key={i}>{d}</td>)}
+						{row.map((d,i)=><td key={i}>{d.toLocaleString()}</td>)}
 					</tr>)
 				)
 			}
 		</tbody>
 		<tfoot>
 			<tr>
-				{totals.map((d,i)=><td key={i}>{d}</td>)}
+				{totals.map((d,i)=><td key={i}>{d.toLocaleString()}</td>)}
 			</tr>
 		</tfoot>
 	</table>
