@@ -12,7 +12,7 @@ export default function overpayments(state = initialState, action) {
 			item
 		)
   case DELETE_OVERPAYMENT:
-  	return state.filter(function(d,i) {return i!==+action.index});
+  	return state.filter(function(_,i) {return i!==+action.index});
   default:
     return state;
   }
