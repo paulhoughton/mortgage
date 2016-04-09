@@ -7,7 +7,7 @@ export default ({actions, initial, years, rate, className})=>(
     </div>
     <div>
       <label>Years</label>
-      <input type="text" maxLength="2" value={years} onChange={actions.setYears}/>
+      <input type="number" maxLength="2" value={years} onChange={actions.setYears}/>
     </div>
     <div>
       <label>Rate</label>
