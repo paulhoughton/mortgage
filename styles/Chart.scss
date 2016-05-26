@@ -1,13 +1,5 @@
 @import "./_variables.scss";
 
-.axis {
-  path,line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-  }
-}
-
 .line {
   fill: none;
   stroke: $primary;
