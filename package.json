@@ -29,6 +29,7 @@
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "tap-webpack-plugin": "^1.1.0",
