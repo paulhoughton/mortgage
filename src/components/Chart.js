@@ -1,4 +1,5 @@
-import '../styles/Chart.scss';
+import React from 'react';
+
 import { select } from 'd3-selection';
 import { line } from 'd3-shape';
 import { scaleLinear } from 'd3-scale';

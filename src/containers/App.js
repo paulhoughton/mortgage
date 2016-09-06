@@ -1,3 +1,4 @@
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
@@ -6,7 +7,6 @@ import * as MortgageActions from '../ducks/mortgage';
 import * as OverpaymentActions from '../ducks/overpayments';
 
 import { calculatePayments } from '../helpers/mortgage';
-import '../styles/App.scss';
 
 class App extends React.Component {
   render() {
@@ -25,8 +25,4 @@ class App extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { ...state };
-}
-
-export default connect(mapStateToProps)(App);
+export default connect(state=>state)(App);

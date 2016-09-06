@@ -1,3 +1,5 @@
+import React from 'react';
+
 import TableMortgage from './TableMortgage';
 import Chart from './Chart';
 import BaseFigures from './BaseFigures';

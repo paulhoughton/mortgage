@@ -10,11 +10,11 @@ const initialState = {
   monthlyOverpayment: 0
 };
 
-export default function reducer(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_INITIAL:
       return {
-      ...state,
+        ...state,
         initial: +action.val
       };
     case SET_RATE:
