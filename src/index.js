@@ -18,3 +18,15 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+if (module.hot) {
+  module.hot.accept('./containers/App', () => {
+    const NextApp = require('./containers/App').default;
+    ReactDOM.render(
+    <Provider store={store}>
+      <NextApp />
+    </Provider>,
+    document.getElementById('root')
+  );
+  });
+}
