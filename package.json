@@ -2,7 +2,6 @@
   "name": "mortgage",
   "version": "0.0.1",
   "description": "Mortgage overpayment calculator",
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -16,15 +15,15 @@
     "d3-selection": "^1.0.2",
     "d3-shape": "^1.0.3",
     "d3-transition": "^1.0.2",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1",
-    "react-redux": "^4.4.5",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
-    "react-scripts": "0.4.1",
-    "react-test-renderer": "^15.3.1"
+    "react-scripts": "0.7.0",
+    "react-test-renderer": "^15.4.0"
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
