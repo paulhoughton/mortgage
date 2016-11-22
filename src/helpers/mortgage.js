@@ -11,8 +11,8 @@ export function calculatePayments({initial, years, rate, monthlyOverpayment, ove
     let interestYearly = 0;
     let overpaymentYearly = 0;
     for (let month = 1; month <= 12; month++) {
-      const overpayment = overpayments.filter(x => (x.year === year && x.month === month))
-        .reduce((acc, val) => acc + val.amount, 0);
+      const overpayment = overpayments.filter(x => (+x.year === year && +x.month === month))
+        .reduce((acc, val) => acc + (+val.amount), 0);
       let interestMonth = balance * monthlyRatePct;
       interestYearly += interestMonth;
       overpaymentYearly += overpayment;

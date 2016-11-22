@@ -15,22 +15,22 @@ export default (state = initialState, action) => {
     case SET_INITIAL:
       return {
         ...state,
-        initial: +action.val
+        initial: action.val
       };
     case SET_RATE:
       return {
         ...state,
-        rate: +action.val
+        rate: action.val
       };
     case SET_YEARS:
       return {
         ...state,
-        years: +action.val
+        years: action.val
       };
     case SET_MONTHLY_OVERPAYMENT:
       return {
         ...state,
-        monthlyOverpayment: +action.val
+        monthlyOverpayment: action.val
       };
     default:
       return state;

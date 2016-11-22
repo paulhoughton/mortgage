@@ -12,7 +12,7 @@ export default (props)=> (
       <Overpayment className="col-sm-8" {...props} />
       <div className="col-sm-12">
         <h2>Monthly Payment
-          <span className="money"> {(+props.monthlyPayment + props.monthlyOverpayment).toFixed(2)}</span>
+          <span className="money"> {(+props.monthlyPayment + (+props.monthlyOverpayment)).toFixed(2)}</span>
         </h2>
         <Chart data={props.payments} />
       </div>

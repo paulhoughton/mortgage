@@ -10,11 +10,11 @@ export default function reducer(state = initialState, action) {
       return state.concat(initialState);
     case UPDATE_OVERPAYMENT:
       return state.map((item, i) => action.index === i ?
-        Object.assign({}, item, { [action.field]: +action.val }) :
+        Object.assign({}, item, { [action.field]: action.val }) :
         item
       );
     case DELETE_OVERPAYMENT:
-      return state.filter((_, i) => i !== +action.index);
+      return state.filter((_, i) => i !== action.index);
     default:
       return state;
   }
