@@ -16,7 +16,7 @@ export function calculatePayments({initial, years, rate, monthlyOverpayment, ove
       let interestMonth = balance * monthlyRatePct;
       interestYearly += interestMonth;
       overpaymentYearly += overpayment;
-      balance -= monthlyPayment + monthlyOverpayment + overpayment - interestMonth;
+      balance -= monthlyPayment + +monthlyOverpayment + overpayment - interestMonth;
       baseline -= monthlyPayment - (baseline * monthlyRatePct);
 
       if (balance <= 0) {
@@ -27,7 +27,7 @@ export function calculatePayments({initial, years, rate, monthlyOverpayment, ove
       }
     }
 
-    payments.push({ baseline, interestYearly, balance, partial, overpayment: overpaymentYearly + (monthlyOverpayment * (partial || 12)) });
+    payments.push({ baseline, interestYearly, balance, partial, overpayment: overpaymentYearly + (+monthlyOverpayment * (partial || 12)) });
     if (partial) partial = 0;
   }
   return { monthlyPayment: monthlyPayment.toFixed(2), payments };
