@@ -1,10 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import payments from '../selectors/payments';
 
 import { select } from 'd3-selection';
 import { line } from 'd3-shape';
 import { scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import 'd3-transition';
+
 
 const margin = { top: 20, right: 20, bottom: 20, left: 80 },
   fullWidth = 800,
@@ -26,9 +30,9 @@ const baselineGenerator = line()
   .x((d, i) => x(i))
   .y(d => y(d.baseline));
 
-export default class Chart extends React.Component {
+class Chart extends React.Component {
   render() {
-    const { data } = this.props;
+    const data = this.props.payments;
     x.domain([0, data.length - 1]);
     y.domain([data[0].balance, 0]);
 
@@ -47,20 +51,22 @@ export default class Chart extends React.Component {
   componentDidMount() {
     this.drawAxis();
   }
-  shouldComponentUpdate({ data }) {
+  shouldComponentUpdate({ payments }) {
 
-    if ((data.length !== this.props.data.length) || (data[0].balance !== this.props.data[0].balance)) {
-        x.domain([0, data.length - 1]);
-        y.domain([data[0].balance, 0]);
+    if ((payments.length !== this.props.payments.length) || (payments[0].balance !== this.props.payments[0].balance)) {
+        x.domain([0, payments.length - 1]);
+        y.domain([payments[0].balance, 0]);
 
         this.drawAxis();
       }
-      this.baseline.transition().attr('d', baselineGenerator(data))
-      this.actual.transition().attr('d', lineGenerator(data));
+      this.baseline.transition().attr('d', baselineGenerator(payments))
+      this.actual.transition().attr('d', lineGenerator(payments));
     return false;
   }
   drawAxis() {
-    this.xAxis.call(axisBottom().scale(x).ticks(Math.min(this.props.data.length, 30)));
+    this.xAxis.call(axisBottom().scale(x).ticks(Math.min(this.props.payments.length, 30)));
     this.yAxis.call(axisLeft().scale(y));
   }
 };
+
+export default connect((state)=>({ ...payments(state) }))(Chart)

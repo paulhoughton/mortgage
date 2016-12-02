@@ -1,11 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default ({ actions, monthlyOverpayment, overpayments, years, className }) => (
-  <div className={className}>
+import { setMonthlyOverpayment } from '../ducks/mortgage';
+import * as actions from '../ducks/overpayments';
+
+
+export default connect(({ mortgage, overpayments })=>({ mortgage, overpayments }))(
+({ mortgage, overpayments, className, dispatch }) => (
+  <div className={ className }>
     <div>
       <h2>Overpayment</h2>
       <label>Monthly</label>
-      <input type="text" maxLength="5" value={monthlyOverpayment} onChange={actions.setMonthlyOverpayment}/>
+      <input type="text" maxLength="5" value={ mortgage.monthlyOverpayment } onChange={ e=>dispatch(setMonthlyOverpayment(e.target.value)) }/>
     </div>
     <div>
         <label>Year</label>
@@ -14,15 +20,15 @@ export default ({ actions, monthlyOverpayment, overpayments, years, className })
     </div>
     {overpayments.map(({ year, month, amount }, i) => (
       <div key={i}>
-        <input type="number" min="0" max={years} value={year} onChange={actions.updateOverpayment(i, "year")} />
-        <input type="number" min="1" max="12" value={month} onChange={actions.updateOverpayment(i, "month")} />
-        <input type="text" value={amount} onChange={actions.updateOverpayment(i, "amount")} />
+        <input type="number" min="0" max={ mortgage.years } value={ year } onChange={ e=>dispatch(actions.updateOverpayment(i, "year", e.target.value )) } />
+        <input type="number" min="1" max="12" value={ month } onChange={ e=>dispatch(actions.updateOverpayment(i, "month", e.target.value )) } />
+        <input type="text" value={ amount } onChange={ e=>dispatch(actions.updateOverpayment(i, "amount", e.target.value )) } />
 
         {i === overpayments.length-1 ?
-          <button className="btn btn-xs" onClick={actions.addOverpayment}>+</button> :
-          <button className="btn btn-xs" onClick={actions.deleteOverpayment(i)}>X</button>}
+          <button className="btn btn-xs" onClick={ e=>dispatch(actions.addOverpayment()) }>+</button> :
+          <button className="btn btn-xs" onClick={ e=>dispatch(actions.deleteOverpayment(i)) }>X</button>}
       </div>))
     }
 
   </div>
-);
+));

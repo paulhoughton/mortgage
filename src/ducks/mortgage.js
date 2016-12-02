@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
   }
 }
 
-export const setInitial = (event) => ({ type: SET_INITIAL, val: event.target.value });
-export const setYears = (event) => ({ type: SET_YEARS, val: event.target.value });
-export const setRate = (event) => ({ type: SET_RATE, val: event.target.value });
-export const setMonthlyOverpayment = (event) => ({ type: SET_MONTHLY_OVERPAYMENT, val: event.target.value });
+export const setInitial = val => ({ type: SET_INITIAL, val });
+export const setYears = val => ({ type: SET_YEARS, val });
+export const setRate = val => ({ type: SET_RATE, val });
+export const setMonthlyOverpayment = val => ({ type: SET_MONTHLY_OVERPAYMENT, val });

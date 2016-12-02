@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore } from 'redux';
 
 import rootReducer from './ducks';
 
-import App from './containers/App';
+import App from './components/App';
 
 import './index.css';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,8 +19,8 @@ ReactDOM.render(
 );
 
 if (module.hot) {
-  module.hot.accept('./containers/App', () => {
-    const NextApp = require('./containers/App').default;
+  module.hot.accept('./components/App', () => {
+    const NextApp = require('./components/App').default;
     ReactDOM.render(
     <Provider store={store}>
       <NextApp />

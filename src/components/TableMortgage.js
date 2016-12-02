@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
+import payments from '../selectors/payments';
 import Table from './Table';
 
-export default ({payments, className})=> {
+export const TableMortgage = (({payments, className})=> {
 	let output=payments.slice(1)
 		.filter(year=>year.balance>0 || year.interestYearly>0)
 		.reduce((acc, year, index) => {
@@ -21,4 +23,6 @@ export default ({payments, className})=> {
 			headings={["Years", "Interest", "Overpayment", "Balance"]}
 			rows={output.rows}
 			totals={[" ",Math.round(output.interestTotal), Math.round(output.overpaymentTotal)," "]} />;
-};
+});
+
+export default connect(state=>({ ...payments(state) }))(TableMortgage)

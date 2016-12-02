@@ -21,8 +21,5 @@ export default function reducer(state = initialState, action) {
 }
 
 export const addOverpayment = () => ({ type: ADD_OVERPAYMENT });
-export const deleteOverpayment = index => dispatch => () => dispatch({ type: DELETE_OVERPAYMENT, index });
-export const updateOverpayment = (index, field) => dispatch => event => dispatch(
-  { type: UPDATE_OVERPAYMENT, index, field, val: event.target.value }
-);
-
+export const deleteOverpayment = index => ({ type: DELETE_OVERPAYMENT, index });
+export const updateOverpayment = (index, field, val) => ({ type: UPDATE_OVERPAYMENT, index, field, val });
