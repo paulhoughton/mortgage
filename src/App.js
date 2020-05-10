@@ -9,9 +9,9 @@ import calculate from './calculations';
 const defaultOverpayment = { month: '1', year: '0', amount: '0' };
 
 export default () => {
-  const [initial, setInitial] = useState('200000');
-  const [rate, setRate] = useState('5');
-  const [years, setYears] = useState('25');
+  const [initial, setInitial] = useState('220000');
+  const [rate, setRate] = useState('3.375');
+  const [years, setYears] = useState('30');
   const [monthlyOverpayment, setMonthlyOverpayment] = useState('0');
   const [overpayments, setOverpayments] = useState([defaultOverpayment]);
 
