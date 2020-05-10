@@ -5,6 +5,7 @@ export default function calculatePayments(
   monthlyOverpayment,
   overpayments = []
 ) {
+  // 1200 = 12 months * 100 (conversion for percent)
   const monthlyRatePct = rate / 1200;
   const monthlyPayment =
     monthlyRatePct === 0
@@ -12,8 +13,14 @@ export default function calculatePayments(
       : (initial * monthlyRatePct) /
         (1 - Math.pow(1 / (1 + monthlyRatePct), years * 12));
   let balance = initial;
+
+  // baseline used for calculating scenario 
+  // where no overpayment is done 
   let baseline = initial;
+
   let payments = [{ overpayment: 0, balance, baseline }];
+  
+  // partial used to convey completion of loan payment mid-year
   let partial;
 
   for (let year = 0; year < years; year++) {
@@ -26,6 +33,8 @@ export default function calculatePayments(
       let interestMonth = balance * monthlyRatePct;
       interestYearly += interestMonth;
       overpaymentYearly += overpayment;
+      
+      // principal payment is monthlyPayment - interestMonth
       balance -=
         monthlyPayment + monthlyOverpayment + overpayment - interestMonth;
       baseline -= monthlyPayment - baseline * monthlyRatePct;
