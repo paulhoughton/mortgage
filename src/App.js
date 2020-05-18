@@ -4,7 +4,7 @@ import './App.css';
 
 import Table from './Table';
 import Chart from './Chart';
-import calculate from './calculations';
+import calculateMortgage from './Mortgage';
 
 const defaultOverpayment = { month: '1', year: '0', amount: '0' };
 
@@ -30,12 +30,16 @@ export default () => {
       )
     );
 
-  const { monthlyPayment, payments } = calculate(
+  const { monthlyPayment, mortgagePayments, creditPayments } = calculateMortgage(
     +initial,
     +years,
     +rate,
     +monthlyOverpayment,
-    overpayments
+    overpayments,
+    +recurringCredit,
+    +creditInterest,
+    +serviceFee,
+    +monthlyCreditPayment,
   );
 
   return (
@@ -104,6 +108,15 @@ export default () => {
                 onChange={e => setServiceFee(e.target.value)}
               />
             </div>
+            <div>
+              <label>Montly Payment</label>
+              <input
+                type="number"
+                step={0.1}
+                value={monthlyCreditPayment}
+                onChange={e => setMonthlyCreditPayment(e.target.value)}
+              />
+            </div>
           </div>
           <div className="col-sm-8">
             <div>
@@ -168,69 +181,6 @@ export default () => {
               </div>
             ))}
           </div>
-          <div className="col-sm-4">
-            <div>
-              <h2>Credit Line Payment</h2>
-              <label>Monthly</label>
-              <input
-                type="number"
-                maxLength={5}
-                value={monthlyCreditPayment}
-                onChange={e => setMonthlyCreditPayment(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Year</label>
-              <label>Month</label>
-              <label>Amount</label>
-            </div>
-            {overpayments.map(({ year, month, amount }, i) => (
-              <div key={i}>
-                <input
-                  type="number"
-                  min="0"
-                  max={years}
-                  value={year}
-                  name="year"
-                  onChange={updateOverpayment(i)}
-                />
-                <input
-                  type="number"
-                  min="1"
-                  max="12"
-                  value={month}
-                  name="month"
-                  onChange={updateOverpayment(i)}
-                />
-                <input
-                  type="text"
-                  value={amount}
-                  name="amount"
-                  onChange={updateOverpayment(i)}
-                />
-
-                {i === overpayments.length - 1 ? (
-                  <button
-                    className="btn btn-xs"
-                    onClick={() =>
-                      setOverpayments([...overpayments, defaultOverpayment])
-                    }
-                  >
-                    +
-                  </button>
-                ) : (
-                  <button
-                    className="btn btn-xs"
-                    onClick={() =>
-                      setOverpayments(overpayments.filter((_, j) => j !== i))
-                    }
-                  >
-                    X
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
           <div className="col-sm-12">
             <h2>
               Monthly Payment
@@ -238,10 +188,12 @@ export default () => {
                 {(+monthlyOverpayment + monthlyPayment).toFixed(2)}
               </span>
             </h2>
-            <Chart payments={payments} />
+            <Chart payments={mortgagePayments} />
+            <Chart payments={creditPayments} />
           </div>
         </div>
-        <Table className="col-sm-4" payments={payments} />
+        <Table className="col-sm-4" payments={mortgagePayments} />
+        <Table className="col-sm-4" payments={creditPayments} />
       </div>
     </div>
   );

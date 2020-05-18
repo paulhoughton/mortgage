@@ -3,10 +3,16 @@ export default function calculatePayments(
   years,
   rate,
   monthlyOverpayment,
-  overpayments = []
+  overpayments,
+  recurringCredit,
+  creditInterest,
+  serviceFee,
+  monthlyCreditPayment,
 ) {
   // 1200 = 12 months * 100 (conversion for percent)
   const monthlyRatePct = rate / 1200;
+  const monthlyCreditRate = creditInterest / 1200;
+
   const monthlyPayment =
     monthlyRatePct === 0
       ? initial / years / 12
@@ -14,22 +20,37 @@ export default function calculatePayments(
         (1 - Math.pow(1 / (1 + monthlyRatePct), years * 12));
   let balance = initial;
 
+  let creditBalance = 0;
+
   // baseline used for calculating scenario 
   // where no overpayment is done 
   let baseline = initial;
 
-  let payments = [{ overpayment: 0, balance, baseline }];
-  
+  let mortgagePayments = [{overpayment: 0, balance, baseline}];
+  let creditPayments = [{balance: recurringCredit}];
+
   // partial used to convey completion of loan payment mid-year
   let partial;
 
   for (let year = 0; year < years; year++) {
     let interestYearly = 0;
+    let creditInterestYearly = 0;
     let overpaymentYearly = 0;
     for (let month = 1; month <= 12; month++) {
-      const overpayment = overpayments
+      let overpayment = overpayments
         .filter(x => +x.year === year && +x.month === month)
         .reduce((acc, val) => acc + +val.amount, 0);
+
+      if (balance > 0 && creditBalance === 0){
+        creditBalance = recurringCredit;
+        overpayment += creditBalance;
+        creditInterestYearly += creditBalance * (serviceFee/100)
+      } 
+
+      creditInterestYearly += monthlyCreditRate * creditBalance;
+      creditBalance -= monthlyCreditPayment
+      creditBalance = Math.max(creditBalance, 0)
+
       let interestMonth = balance * monthlyRatePct;
       interestYearly += interestMonth;
       overpaymentYearly += overpayment;
@@ -46,8 +67,15 @@ export default function calculatePayments(
         }
       }
     }
+    creditPayments.push({
+      baseline: 0,
+      interestYearly: creditInterestYearly,
+      balance: creditBalance,
+      partial,
+      overpayment: monthlyCreditPayment,
+    })
 
-    payments.push({
+    mortgagePayments.push({
       baseline,
       interestYearly,
       balance,
@@ -56,5 +84,8 @@ export default function calculatePayments(
     });
     if (partial) partial = 0;
   }
-  return { monthlyPayment, payments };
+
+  console.log(creditPayments)
+
+  return { monthlyPayment, mortgagePayments, creditPayments };
 }
