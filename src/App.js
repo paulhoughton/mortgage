@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import  { withLDProvider } from 'launchdarkly-react-client-sdk';
 import './App.css';
 
 import Table from './Table';
@@ -8,7 +8,7 @@ import calculate from './calculations';
 
 const defaultOverpayment = { month: '1', year: '0', amount: '0' };
 
-export default () => {
+const App = () => {
   const [initial, setInitial] = useState('200000');
   const [rate, setRate] = useState('5');
   const [years, setYears] = useState('25');
@@ -148,3 +148,5 @@ export default () => {
     </div>
   );
 };
+
+export default withLDProvider({ clientSideID: '607a030de00b830bbb2020e5' })(App);
