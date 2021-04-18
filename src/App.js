@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import  { withLDProvider } from 'launchdarkly-react-client-sdk';
+import  { withLDProvider, useFlags } from 'launchdarkly-react-client-sdk';
 import './App.css';
-
 import Table from './Table';
 import Chart from './Chart';
 import calculate from './calculations';
@@ -14,7 +13,9 @@ const App = () => {
   const [years, setYears] = useState('25');
   const [monthlyOverpayment, setMonthlyOverpayment] = useState('0');
   const [overpayments, setOverpayments] = useState([defaultOverpayment]);
-
+  const { testFlag } = useFlags();
+  console.log(testFlag, 100);
+  
   const updateOverpayment = index => ({ target }) =>
     setOverpayments(
       overpayments.map((overpayment, i) =>
