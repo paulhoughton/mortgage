@@ -4,6 +4,7 @@ import './App.css';
 import Table from './Table';
 import Chart from './Chart';
 import calculate from './calculations';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const defaultOverpayment = { month: '1', year: '0', amount: '0' };
 const defaultActualPayment = {}
@@ -18,7 +19,7 @@ const App = () => {
   const [actualYearPayment, setActualYearPayment] = useState('0');
   const [actualPayments, setActualPayments] = useState(defaultActualPayment);
 
-  const { actualPaymentForm } = useFlags();
+  const { actualPaymentForm, actualProgressBar } = useFlags();
   
   const updateOverpayment = index => ({ target }) => {
     setOverpayments(
@@ -31,7 +32,7 @@ const App = () => {
   }
   
   const setActualPayment = (year, amount) => {
-    if (amount < 0 || year < 0 || year > years) return;
+    if (amount < 0 || year < 0 || year > Number(years)) return;
     setActualPayments(
       {
         ...actualPayments,
@@ -190,6 +191,12 @@ const App = () => {
               </span>
             </h2>
             <Chart payments={payments} />
+            {actualProgressBar ? 
+            <ProgressBar now={actualTotal}
+                        min={0}
+                        max={initial}
+                        label={`${actualTotal} / ${initial}`}></ProgressBar> 
+            : null}
           </div>
         </div>
         <Table className="col-sm-4" payments={payments} actualTotal={actualTotal} />
