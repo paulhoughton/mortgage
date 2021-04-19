@@ -1,10 +1,14 @@
+import { useFlags } from 'launchdarkly-react-client-sdk'; 
+
 export default function calculatePayments(
   initial,
   years,
   rate,
   monthlyOverpayment,
-  overpayments = []
+  overpayments = [],
+  actualPayments = {},
 ) {
+  const { actualPaymentForm } = useFlags();
   const monthlyRatePct = rate / 1200;
   const monthlyPayment =
     monthlyRatePct === 0
@@ -26,6 +30,12 @@ export default function calculatePayments(
       let interestMonth = balance * monthlyRatePct;
       interestYearly += interestMonth;
       overpaymentYearly += overpayment;
+      let actualPay = actualPayments[year] || 0;
+
+      actualPaymentForm ? 
+      
+      balance -= actualPay - interestMonth :
+
       balance -=
         monthlyPayment + monthlyOverpayment + overpayment - interestMonth;
       baseline -= monthlyPayment - baseline * monthlyRatePct;

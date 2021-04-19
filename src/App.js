@@ -6,7 +6,7 @@ import Chart from './Chart';
 import calculate from './calculations';
 
 const defaultOverpayment = { month: '1', year: '0', amount: '0' };
-const defaultActualPayment = { year: '1', amount: '0'}
+const defaultActualPayment = {}
 
 const App = () => {
   const [initial, setInitial] = useState('200000');
@@ -14,10 +14,13 @@ const App = () => {
   const [years, setYears] = useState('25');
   const [monthlyOverpayment, setMonthlyOverpayment] = useState('0');
   const [overpayments, setOverpayments] = useState([defaultOverpayment]);
+  const [actualYear, setActualYear] = useState('0');
+  const [actualYearPayment, setActualYearPayment] = useState('0');
+  const [actualPayments, setActualPayments] = useState(defaultActualPayment);
 
-  const { actualInfo } = useFlags();
+  const { actualPaymentForm } = useFlags();
   
-  const updateOverpayment = index => ({ target }) =>
+  const updateOverpayment = index => ({ target }) => {
     setOverpayments(
       overpayments.map((overpayment, i) =>
         i === index
@@ -25,13 +28,21 @@ const App = () => {
           : overpayment
       )
     );
+  }
+  
+  const setActualPayment = (year, amount) => {
+    setActualPayments(
+      defaultActualPayment[year] = amount
+    )
+  }
 
   const { monthlyPayment, payments } = calculate(
     +initial,
     +years,
     +rate,
     +monthlyOverpayment,
-    overpayments
+    overpayments,
+    actualPayments
   );
 
   return (
@@ -41,6 +52,7 @@ const App = () => {
           <div className="navbar-brand">Mortgage Overpayment Calculator</div>
         </div>
       </nav>
+
       <div className="container-fluid">
         <div className="col-md-8 col-sm-12">
           <div className="col-sm-4">
@@ -135,19 +147,37 @@ const App = () => {
               </div>
             ))}
           </div>
-          { actualInfo ? 
+
+          { actualPaymentForm ? 
           <div className="col-sm-10">
             <div>
               <h2>Actual Payments</h2>
               <label>Year</label>
               <input
                 type="number"
-                min="1"
+                min="0"
                 max={years}
+                value={0}
+                onChange={e => setActualYear(e.target.value)}
                 />
+              <label>Amount</label>
+              <input
+                maxLength={7}
+                value={0}
+                onChange={e => setActualYearPayment(e.target.value)}
+                />
+              <button
+                    className="btn btn-xs"
+                    onClick={() =>
+                      setActualPayment(actualYear, actualYearPayment)
+                    }
+                  >
+                    +
+                  </button>
             </div>
           </div>
           : <div></div> }
+
           <div className="col-sm-12">
             <h2>
               Monthly Payment
