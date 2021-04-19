@@ -17,8 +17,8 @@ export default ({ payments, className, actualTotal }) => {
             year.partial ? year.partial + 'm' : index + 1,
             Math.round(year.interestYearly || 0),
             Math.round(year.overpayment),
-            Math.round(year.actualPay || 0), 
-            Math.round(year.balance)
+            Math.round(year.balance),
+            Math.round(year.actualPay || 0) 
           ]
         ] :
         [
@@ -41,8 +41,8 @@ export default ({ payments, className, actualTotal }) => {
           <th>Years</th>
           <th>Interest</th>
           <th>Overpayment</th>
-          { actualTable ? <th>Actual</th> : null}
           <th>Balance</th>
+          { actualTable ? <th>Actual</th> : null}
         </tr>
       </thead>
       <tbody>
