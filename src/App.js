@@ -33,7 +33,7 @@ const App = () => {
   const setActualPayment = (year, amount) => {
     setActualPayments(
       {
-        ...defaultActualPayment,
+        ...actualPayments,
         [year]: amount
       }
     )
