@@ -17,7 +17,7 @@ export default ({ payments, className }) => {
             year.partial ? year.partial + 'm' : index + 1,
             Math.round(year.interestYearly || 0),
             Math.round(year.overpayment),
-            Math.round(year.actual || 0), 
+            Math.round(year.actualPay || 0), 
             Math.round(year.balance)
           ]
         ] :
