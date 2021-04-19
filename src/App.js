@@ -31,6 +31,7 @@ const App = () => {
   }
   
   const setActualPayment = (year, amount) => {
+    if (amount < 0 || year < 0 || year > years) return;
     setActualPayments(
       {
         ...actualPayments,
@@ -47,8 +48,6 @@ const App = () => {
     overpayments,
     actualPayments
   );
-
-  console.log(actualTotal);
 
   return (
     <div>
@@ -167,6 +166,8 @@ const App = () => {
               <label>Amount</label>
               <input
                 maxLength={7}
+                min="1"
+                max={initial}
                 onChange={e => setActualYearPayment(e.target.value)}
                 />
               <button
