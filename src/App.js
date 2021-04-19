@@ -32,10 +32,14 @@ const App = () => {
   
   const setActualPayment = (year, amount) => {
     setActualPayments(
-      defaultActualPayment[year] = amount
+      {
+        ...defaultActualPayment,
+        [year]: amount
+      }
     )
   }
 
+  console.log(actualPayments);
   const { monthlyPayment, payments } = calculate(
     +initial,
     +years,
@@ -157,13 +161,11 @@ const App = () => {
                 type="number"
                 min="0"
                 max={years}
-                value={0}
                 onChange={e => setActualYear(e.target.value)}
                 />
               <label>Amount</label>
               <input
                 maxLength={7}
-                value={0}
                 onChange={e => setActualYearPayment(e.target.value)}
                 />
               <button
@@ -176,7 +178,7 @@ const App = () => {
                   </button>
             </div>
           </div>
-          : <div></div> }
+          : null }
 
           <div className="col-sm-12">
             <h2>
