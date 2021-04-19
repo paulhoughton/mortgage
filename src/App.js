@@ -6,6 +6,7 @@ import Chart from './Chart';
 import calculate from './calculations';
 
 const defaultOverpayment = { month: '1', year: '0', amount: '0' };
+const defaultActualPayment = { year: '1', amount: '0'}
 
 const App = () => {
   const [initial, setInitial] = useState('200000');
@@ -13,8 +14,8 @@ const App = () => {
   const [years, setYears] = useState('25');
   const [monthlyOverpayment, setMonthlyOverpayment] = useState('0');
   const [overpayments, setOverpayments] = useState([defaultOverpayment]);
-  const { testFlag } = useFlags();
-  console.log(testFlag, 100);
+
+  const { actualInfo } = useFlags();
   
   const updateOverpayment = index => ({ target }) =>
     setOverpayments(
@@ -134,6 +135,19 @@ const App = () => {
               </div>
             ))}
           </div>
+          { actualInfo ? 
+          <div className="col-sm-10">
+            <div>
+              <h2>Actual Payments</h2>
+              <label>Year</label>
+              <input
+                type="number"
+                min="1"
+                max={years}
+                />
+            </div>
+          </div>
+          : <div></div> }
           <div className="col-sm-12">
             <h2>
               Monthly Payment

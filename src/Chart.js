@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { useFlags } from 'launchdarkly-react-client-sdk';
 import { select } from 'd3-selection';
 import { line } from 'd3-shape';
 import { scaleLinear } from 'd3-scale';
@@ -48,9 +47,7 @@ export default ({ payments }) => {
       .transition()
       .attr('d', actual(payments));
   }, [payments]);
-  const testing = useFlags();
-  console.log(JSON.stringify(testing), 'testing');
-  
+
   return (
     <svg
       ref={chart}
