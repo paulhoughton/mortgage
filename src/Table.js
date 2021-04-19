@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFlags } from 'launchdarkly-react-client-sdk';
 
-export default ({ payments, className }) => {
+export default ({ payments, className, actualTotal }) => {
   const { actualTable } = useFlags();
 
   let output = payments
@@ -59,8 +59,10 @@ export default ({ payments, className }) => {
           <td colSpan={2}>
             {Math.round(output.interestTotal).toLocaleString()}
           </td>
-          <td>{Math.round(output.overpaymentTotal).toLocaleString()}</td>
+          <td colSpan={1}>{Math.round(output.overpaymentTotal).toLocaleString()}</td>
           <td />
+          {actualTable ? <td colSpan={1}>{Math.round(actualTotal).toLocaleString()}</td>
+          : null}
         </tr>
       </tfoot>
     </table>

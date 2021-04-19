@@ -39,8 +39,7 @@ const App = () => {
     )
   }
 
-  console.log(actualPayments);
-  const { monthlyPayment, payments } = calculate(
+  const { monthlyPayment, payments, actualTotal } = calculate(
     +initial,
     +years,
     +rate,
@@ -48,6 +47,8 @@ const App = () => {
     overpayments,
     actualPayments
   );
+
+  console.log(actualTotal);
 
   return (
     <div>
@@ -159,7 +160,7 @@ const App = () => {
               <label>Year</label>
               <input
                 type="number"
-                min="0"
+                min="1"
                 max={years}
                 onChange={e => setActualYear(e.target.value)}
                 />
@@ -190,7 +191,7 @@ const App = () => {
             <Chart payments={payments} />
           </div>
         </div>
-        <Table className="col-sm-4" payments={payments} />
+        <Table className="col-sm-4" payments={payments} actualTotal={actualTotal} />
       </div>
     </div>
   );

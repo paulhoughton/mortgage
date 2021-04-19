@@ -16,11 +16,12 @@ export default function calculatePayments(
   let baseline = initial;
   let payments = [{ overpayment: 0, balance, baseline }];
   let partial;
-
+  let actualTotal = 0;
   for (let year = 0; year < years; year++) {
     let interestYearly = 0;
     let overpaymentYearly = 0;
-    let actualPay = actualPayments[year+1] || 0;
+    let actualPay = Number(actualPayments[year+1]) || 0;
+    actualTotal += actualPay
     for (let month = 1; month <= 12; month++) {
       const overpayment = overpayments
         .filter(x => +x.year === year && +x.month === month)
@@ -51,5 +52,5 @@ export default function calculatePayments(
     });
     if (partial) partial = 0;
   }
-  return { monthlyPayment, payments };
+  return { monthlyPayment, payments, actualTotal };
 }
