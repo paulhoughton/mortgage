@@ -20,7 +20,7 @@ export default function calculatePayments(
   for (let year = 0; year < years; year++) {
     let interestYearly = 0;
     let overpaymentYearly = 0;
-    let actualPay = actualPayments[year] || 0;
+    let actualPay = actualPayments[year+1] || 0;
     for (let month = 1; month <= 12; month++) {
       const overpayment = overpayments
         .filter(x => +x.year === year && +x.month === month)
