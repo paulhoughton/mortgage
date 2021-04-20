@@ -35,7 +35,7 @@ actual-table: This feature flag controls information from actual-payment-form an
 
 actual-progress-bar: Similar to actual-table.  Information from actual-payment-form can be displayed progressively to allow users to visually see their progress toward their mortgage. 
 
-prerequisites: actual-payment-form (T)
+Prerequisites: actual-payment-form (T)
       Reasoning for this pre-requisite is same as actual-table but it will display an empty progress bar at the bottom instead.  
 
 Why do I not have actual-table and actual-progress bar as a prerequisite for each other?
