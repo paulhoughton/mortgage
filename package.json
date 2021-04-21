@@ -2,12 +2,15 @@
   "name": "mortgage",
   "version": "0.1.0",
   "dependencies": {
+    "bootstrap": "^4.6.0",
     "d3-axis": "^1.0.12",
     "d3-scale": "^2.2.2",
     "d3-selection": "^1.4.0",
     "d3-shape": "^1.3.4",
     "d3-transition": "^1.2.0",
+    "launchdarkly-react-client-sdk": "^2.22.2",
     "react": "^16.8.1",
+    "react-bootstrap": "^1.5.2",
     "react-dom": "^16.8.1",
     "react-scripts": "2.1.3"
   },

@@ -3,7 +3,8 @@ export default function calculatePayments(
   years,
   rate,
   monthlyOverpayment,
-  overpayments = []
+  overpayments = [],
+  actualPayments = {},
 ) {
   const monthlyRatePct = rate / 1200;
   const monthlyPayment =
@@ -15,10 +16,12 @@ export default function calculatePayments(
   let baseline = initial;
   let payments = [{ overpayment: 0, balance, baseline }];
   let partial;
-
+  let actualTotal = 0;
   for (let year = 0; year < years; year++) {
     let interestYearly = 0;
     let overpaymentYearly = 0;
+    let actualPay = Number(actualPayments[year+1]) || 0;
+    actualTotal += actualPay
     for (let month = 1; month <= 12; month++) {
       const overpayment = overpayments
         .filter(x => +x.year === year && +x.month === month)
@@ -26,8 +29,9 @@ export default function calculatePayments(
       let interestMonth = balance * monthlyRatePct;
       interestYearly += interestMonth;
       overpaymentYearly += overpayment;
-      balance -=
-        monthlyPayment + monthlyOverpayment + overpayment - interestMonth;
+
+      balance -= monthlyPayment + monthlyOverpayment + overpayment - interestMonth;
+
       baseline -= monthlyPayment - baseline * monthlyRatePct;
 
       if (balance <= 0) {
@@ -43,9 +47,10 @@ export default function calculatePayments(
       interestYearly,
       balance,
       partial,
-      overpayment: overpaymentYearly + +monthlyOverpayment * (partial || 12)
+      overpayment: overpaymentYearly + +monthlyOverpayment * (partial || 12),
+      actualPay
     });
     if (partial) partial = 0;
   }
-  return { monthlyPayment, payments };
+  return { monthlyPayment, payments, actualTotal };
 }

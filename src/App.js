@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
-
+import  { withLDProvider, useFlags } from 'launchdarkly-react-client-sdk';
 import './App.css';
-
 import Table from './Table';
 import Chart from './Chart';
 import calculate from './calculations';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const defaultOverpayment = { month: '1', year: '0', amount: '0' };
+const defaultActualPayment = {}
 
-export default () => {
+const App = () => {
   const [initial, setInitial] = useState('200000');
   const [rate, setRate] = useState('5');
   const [years, setYears] = useState('25');
   const [monthlyOverpayment, setMonthlyOverpayment] = useState('0');
   const [overpayments, setOverpayments] = useState([defaultOverpayment]);
+  const [actualYear, setActualYear] = useState('0');
+  const [actualYearPayment, setActualYearPayment] = useState('0');
+  const [actualPayments, setActualPayments] = useState(defaultActualPayment);
 
-  const updateOverpayment = index => ({ target }) =>
+  const { actualPaymentForm, actualProgressBar } = useFlags();
+  
+  const updateOverpayment = index => ({ target }) => {
     setOverpayments(
       overpayments.map((overpayment, i) =>
         i === index
@@ -23,13 +29,25 @@ export default () => {
           : overpayment
       )
     );
+  }
+  
+  const setActualPayment = (year, amount) => {
+    if (amount < 0 || year < 0 || year > Number(years)) return;
+    setActualPayments(
+      {
+        ...actualPayments,
+        [year]: amount
+      }
+    )
+  }
 
-  const { monthlyPayment, payments } = calculate(
+  const { monthlyPayment, payments, actualTotal } = calculate(
     +initial,
     +years,
     +rate,
     +monthlyOverpayment,
-    overpayments
+    overpayments,
+    actualPayments
   );
 
   return (
@@ -39,6 +57,7 @@ export default () => {
           <div className="navbar-brand">Mortgage Overpayment Calculator</div>
         </div>
       </nav>
+
       <div className="container-fluid">
         <div className="col-md-8 col-sm-12">
           <div className="col-sm-4">
@@ -133,6 +152,37 @@ export default () => {
               </div>
             ))}
           </div>
+
+          { actualPaymentForm ? 
+          <div className="col-sm-10">
+            <div>
+              <h2>Actual Payments</h2>
+              <label>Year</label>
+              <input
+                type="number"
+                min="1"
+                max={years}
+                onChange={e => setActualYear(e.target.value)}
+                />
+              <label>Amount</label>
+              <input
+                maxLength={7}
+                min="1"
+                max={initial}
+                onChange={e => setActualYearPayment(e.target.value)}
+                />
+              <button
+                    className="btn btn-xs"
+                    onClick={() =>
+                      setActualPayment(actualYear, actualYearPayment)
+                    }
+                  >
+                    +
+                  </button>
+            </div>
+          </div>
+          : null }
+
           <div className="col-sm-12">
             <h2>
               Monthly Payment
@@ -141,10 +191,18 @@ export default () => {
               </span>
             </h2>
             <Chart payments={payments} />
+            {actualProgressBar ? 
+            <ProgressBar now={actualTotal}
+                        min={0}
+                        max={initial}
+                        label={`${actualTotal} / ${initial}`}></ProgressBar> 
+            : null}
           </div>
         </div>
-        <Table className="col-sm-4" payments={payments} />
+        <Table className="col-sm-4" payments={payments} actualTotal={actualTotal} />
       </div>
     </div>
   );
 };
+
+export default withLDProvider({ clientSideID: '607a030de00b830bbb2020e5' })(App);

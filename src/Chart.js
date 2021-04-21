@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-
 import { select } from 'd3-selection';
 import { line } from 'd3-shape';
 import { scaleLinear } from 'd3-scale';
