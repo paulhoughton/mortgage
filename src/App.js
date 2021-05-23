@@ -81,7 +81,7 @@ export default () => {
                             />
                         </div>
                         <div>
-                            <label>Rate</label>
+                            <label> <span className='percentage'>% </span>Rate</label>
                             <input
                                 type="number"
                                 step={0.1}
