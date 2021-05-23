@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import EventIcon from '@material-ui/icons/Event';
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import './App.css';
 
@@ -36,7 +41,9 @@ export default () => {
     <div>
       <nav className="navbar navbar-default">
         <div className="navbar-header">
-          <div className="navbar-brand">Mortgage Overpayment Calculator</div>
+          <div className="navbar-brand" style={{fontFamily: 'Times New Roman', fontSize: 25}}>
+            Mortgage Overpayment Calculator
+          </div>
         </div>
       </nav>
       <div className="container-fluid">
@@ -44,7 +51,10 @@ export default () => {
           <div className="col-sm-4">
             <div>
               <h2>Initial</h2>
-              <label>Amount</label>
+              <label>
+                <MonetizationOnIcon className= {'material-icons'} />
+                Amount
+              </label>
               <input
                 maxLength={7}
                 value={initial}
@@ -52,7 +62,10 @@ export default () => {
               />
             </div>
             <div>
-              <label>Years</label>
+              <label>
+                <EventIcon className= {'material-icons'} />
+                Years
+              </label>
               <input
                 type="number"
                 maxLength={2}
@@ -84,7 +97,10 @@ export default () => {
             <div>
               <label>Year</label>
               <label>Month</label>
-              <label>Amount</label>
+              <label>
+                <MonetizationOnIcon className= {'material-icons'} />
+                Amount
+              </label>
             </div>
             {overpayments.map(({ year, month, amount }, i) => (
               <div key={i}>
@@ -112,23 +128,19 @@ export default () => {
                 />
 
                 {i === overpayments.length - 1 ? (
-                  <button
-                    className="btn btn-xs"
-                    onClick={() =>
-                      setOverpayments([...overpayments, defaultOverpayment])
-                    }
-                  >
-                    +
-                  </button>
+                  <IconButton  color="secondary" variant="outlined"
+                  onClick={() =>
+                    setOverpayments([...overpayments, defaultOverpayment])
+                  }>
+                  <AddIcon />
+                </IconButton>
                 ) : (
-                  <button
-                    className="btn btn-xs"
-                    onClick={() =>
-                      setOverpayments(overpayments.filter((_, j) => j !== i))
-                    }
-                  >
-                    X
-                  </button>
+                   <IconButton  color="secondary" variant="outlined"
+                   onClick={() =>
+                    setOverpayments(overpayments.filter((_, j) => j !== i))
+                  }>
+                   <DeleteIcon />
+                 </IconButton>
                 )}
               </div>
             ))}

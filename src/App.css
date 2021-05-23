@@ -39,3 +39,14 @@ tfoot tr:first-child {
 .baseline {
   stroke-dasharray: 4, 4;
 }
+
+.material-icons{
+  display: inline-flex;
+  vertical-align: top;
+  color: rgb(1, 41, 116);
+  font-size: 15;
+}
+
+.percentage {
+  color: rgb(1, 41, 116);
+}
