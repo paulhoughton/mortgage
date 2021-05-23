@@ -53,9 +53,11 @@ export default () => {
                             <h2>Initial</h2>
                             <label>
                                 <MonetizationOnIcon className= {'material-icons'} />
-                                Amount
+                                Amount<span className={'required'}> *</span>
                             </label>
-                            <input
+                            <input 
+                                //style={{width: "80px"}}
+                                //placeholder="Required"
                                 type="number"
                                 maxLength={7}
                                 value={initial}
@@ -68,9 +70,11 @@ export default () => {
                         <div>
                             <label>
                                 <EventIcon className= {'material-icons'} />
-                                Years
+                                Years<span className={'required'}> *</span>
                             </label>
                             <input
+                                //style={{width: "80px"}}
+                                //placeholder="Required"
                                 type="number"
                                 maxLength={2}
                                 value={years}
@@ -81,8 +85,10 @@ export default () => {
                             />
                         </div>
                         <div>
-                            <label> <span className='percentage'>% </span>Rate</label>
+                            <label> <span className='percentage'>% </span>Rate<span className={'required'}> *</span></label>
                             <input
+                                //style={{width: "80px"}}
+                                //placeholder="Required"
                                 type="number"
                                 step={0.1}
                                 value={rate}
