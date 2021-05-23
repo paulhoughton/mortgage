@@ -4,7 +4,6 @@ import EventIcon from '@material-ui/icons/Event';
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
-import React, {useState} from 'react';
 
 import './App.css';
 
