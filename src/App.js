@@ -51,7 +51,7 @@ export default () => {
         <div>
             <nav className="navbar navbar-default">
                 <div className="navbar-header">
-                    <div className="navbar-brand" style={{fontFamily: 'Times New Roman', fontSize: 25}}>
+                    <div className="navbar-brand" style={{fontFamily: 'Arial', fontSize: 25}}>
                         Mortgage Overpayment Calculator
                     </div>
                 </div>
