@@ -125,7 +125,7 @@ export default () => {
                             </ClickAwayListener>
                         </div>
                         <div>
-                        <Tooltip title={<h6>Current interest rate</h6>}>
+                        <Tooltip title={<h6>Interest rate</h6>}>
                             <label> <span className='percentage'>% </span>Rate</label>
                         </Tooltip>
                             <input
@@ -156,7 +156,9 @@ export default () => {
                     <div className="col-sm-8">
                         <div>
                             <h2>Overpayment</h2>
-                            <label>Monthly</label>
+                            <Tooltip title={<h6>Regular monthly overpayment</h6>}>
+                                <label>Monthly</label>
+                            </Tooltip>                           
                             <input
                                 type="number"
                                 maxLength={5}
@@ -182,12 +184,14 @@ export default () => {
                             </ClickAwayListener>
                         </div>
                         <div>
-                            <label>Year</label>
-                            <label>Month</label>
+                        <label>Year</label>
+                        <label>Month</label>
+                        <Tooltip title={<h6>Lump sum overpayment</h6>}>                                                  
                             <label>
                                 <AttachMoneyIcon className= {'material-icons'} />
                                 Amount
                             </label>
+                        </Tooltip>
                             <ClickAwayListener onClickAway={() => setOpenSinglePayTip(false)}>                             
                                 <Tooltip
                                     PopperProps={{
@@ -198,7 +202,7 @@ export default () => {
                                     disableFocusListener
                                     disableHoverListener
                                     disableTouchListener
-                                    title={<h6>This is the lump sum overpayment made during the specified year and month</h6>}>
+                                    title={<h6>This is the one-off lump sum overpayment (single payment done only once) made during the specified year and month</h6>}>
                                     <HelpIcon className= {'material-icons'} onClick={() => setOpenSinglePayTip(true)}/>
                                 </Tooltip>                      
                             </ClickAwayListener>
