@@ -7,11 +7,16 @@
   color: #ffffff;
 }
 
-input,
 select,
 label {
-  width: 70px;
+  width: 90px;
+  margin-left: 0;
+}
+
+input{
+  width: 90px;
   margin-right: 5px;
+  margin-left: 0;
 }
 
 th,
@@ -51,6 +56,10 @@ tfoot tr:first-child {
   vertical-align: middle;
   color: rgb(1, 41, 116);
   font-size: 15;
+}
+
+.required{
+  color:red
 }
 
 .percentage {

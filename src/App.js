@@ -61,6 +61,7 @@ export default () => {
                     <div className="col-sm-4">
                         <div>
                             <h2>Initial</h2>
+
                             <Tooltip title={<h6>Mortgage debt</h6>}>
                                 <label>
                                     <AttachMoneyIcon className= {'material-icons'} />
@@ -95,12 +96,16 @@ export default () => {
                         <div>
                         <Tooltip title={<h6>Mortgage term</h6>}>
                             <label>
+
                                 {/* <EventIcon className= {'material-icons'} /> */}
                                 &nbsp;&nbsp;&nbsp;&nbsp;Years
+
                             </label>
                         </Tooltip>
                             
                             <input
+                                //style={{width: "80px"}}
+                                //placeholder="Required"
                                 type="number"
                                 maxLength={2}
                                 value={years}
@@ -125,10 +130,14 @@ export default () => {
                             </ClickAwayListener>
                         </div>
                         <div>
+
                         <Tooltip title={<h6>Interest rate</h6>}>
                             <label> <span className='percentage'>% </span>Rate</label>
                         </Tooltip>
+
                             <input
+                                //style={{width: "80px"}}
+                                //placeholder="Required"
                                 type="number"
                                 step={0.1}
                                 value={rate}
