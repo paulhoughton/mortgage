@@ -47,7 +47,13 @@ tfoot tr:first-child {
 
 .material-icons{
   display: inline-flex;
-  vertical-align: top;
+  vertical-align:text-top;
+  color: rgb(1, 41, 116);
+}
+
+.help-icon{
+  display: inline-flex;
+  vertical-align: middle;
   color: rgb(1, 41, 116);
   font-size: 15;
 }
