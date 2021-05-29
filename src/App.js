@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-import EventIcon from '@material-ui/icons/Event';
+import React, { useState, useEffect } from 'react';
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -8,6 +6,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 import HelpIcon from '@material-ui/icons/Help';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import Switch from '@material-ui/core/Switch';
+
+import { useSpeechSynthesis } from 'react-speech-kit';
+import { useSpeechRecognition } from 'react-speech-kit';
 
 import './App.css';
 
@@ -47,13 +49,105 @@ export default () => {
         overpayments
     );
 
+    // switch state
+    const [state, setState] = useState({
+        checked: false
+      }); 
+      
+    const [inputFieldNumber, setInputFieldNumber] = useState('0');
+    const [speakNumber, setSpeakNumber] = useState(0);
+
+    //speech synthesis
+    const { speak } = useSpeechSynthesis();
+
+    // speech recognition
+    const [valueListen, setValueListen] = useState('');
+    const { listen, listening, stop } = useSpeechRecognition({
+        onResult: (result) => {
+            setValueListen(result);   
+        },
+
+        onEnd: () => {
+            setTimeout(() => {
+                setSpeakNumber(speakNumber + 1);
+            }, 1000)           
+        }
+    });
+
+    // on updating checked state
+    useEffect(() => {
+        console.log(state);
+        if (state.checked) {
+            setSpeakNumber(speakNumber +1); 
+        }
+        if (!state.checked) {
+            setSpeakNumber(0); 
+            setInputFieldNumber('0');
+            setValueListen('');
+        }
+    }, [state]);
+
+    // on updating speak number, speak
+    useEffect( () => {
+        console.log(speakNumber);
+        if (speakNumber === 1) {
+            speak( {text:"Please state your initial amount"} );
+            setInputFieldNumber('1'); 
+        } else if (speakNumber === 2) {
+            speak( {text:"Please state the mortgage term"} );
+            setInputFieldNumber('2');
+        } else if (speakNumber === 3) {
+            speak( {text:"Please state the interest rate"} );
+            setInputFieldNumber('3');
+        } else if (speakNumber === 4) {
+            speak( {text:"Please state the regular monthly overpayment, if any"} );
+            setInputFieldNumber('4');
+        }
+    }, [speakNumber]);
+
+    // on updating input field number, start listening and stop in 10 secs
+    useEffect( () => {
+        if (inputFieldNumber !== '0') {
+            listen();
+            setTimeout(() => {
+                stop(); 
+            }, 10000)
+        }
+    }, [inputFieldNumber]);
+
+    // on updating listen value, set input fields
+    useEffect( () => {
+        console.log(valueListen);
+        if (inputFieldNumber === '1') {
+            setInitial(parseFloat(valueListen.replace(/,/g, ''))); 
+        } else if (inputFieldNumber === '2') {
+            setYears(parseFloat(valueListen.replace(/,/g, ''))); 
+        } else if (inputFieldNumber === '3') {
+            setRate(parseFloat(valueListen.replace(/,/g, ''))); 
+        } else if (inputFieldNumber === '4') {
+            setMonthlyOverpayment(parseFloat(valueListen.replace(/,/g, ''))); 
+        } 
+    }, [valueListen]);
+
+    const handleChange = (event) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+    };
+
     return (
-        <div>
+        <React.Fragment>
             <nav className="navbar navbar-default">
                 <div className="navbar-header">
                     <div className="navbar-brand" style={{fontFamily: 'Arial', fontSize: 25}}>
                         Mortgage Overpayment Calculator
                     </div>
+                </div>
+                <div>
+                <Switch
+                    checked={state.checked}
+                    onChange={handleChange}
+                    name="checked"
+                />
+                {listening && <div>Go ahead I'm listening</div>}
                 </div>
             </nav>
             <div className="container-fluid">
@@ -276,6 +370,6 @@ export default () => {
                     </div>
                 <Table className="col-sm-3 col-md-3 col-lg-3" payments={payments}/>
             </div>
-        </div>
+        </React.Fragment>
     );
 };
