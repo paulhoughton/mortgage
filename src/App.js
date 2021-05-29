@@ -103,6 +103,9 @@ export default () => {
         } else if (speakNumber === 4) {
             speak( {text:"Please state the regular monthly overpayment, if any"} );
             setInputFieldNumber('4');
+        } else if (speakNumber === 5) {
+            speak( {text:"Your monthly payment is " + (+monthlyOverpayment + monthlyPayment).toFixed(2)} );
+            setState({ ...state, checked: false }); 
         }
     }, [speakNumber]);
 
@@ -133,8 +136,12 @@ export default () => {
         setState({ ...state, [event.target.name]: event.target.checked });
     };
 
+    const handleChangeDoubleClick = (event) => {
+        setState({ ...state, checked: true });
+    };
+
     return (
-        <React.Fragment>
+        <div onDoubleClick={handleChangeDoubleClick} onKeyPress={handleChangeDoubleClick}>
             <nav className="navbar navbar-default">
                 <div className="navbar-header">
                     <div className="navbar-brand" style={{fontFamily: 'Arial', fontSize: 25}}>
@@ -370,6 +377,6 @@ export default () => {
                     </div>
                 <Table className="col-sm-3 col-md-3 col-lg-3" payments={payments}/>
             </div>
-        </React.Fragment>
+        </div>
     );
 };
