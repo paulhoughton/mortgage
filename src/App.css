@@ -65,3 +65,29 @@ tfoot tr:first-child {
 .percentage {
   color: rgb(1, 41, 116);
 }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+h3{
+  margin: 0px;
+}
+
+.panel{
+  margin: 5px;
+}
+
+.panel-body{
+  padding: 5px 10px;
+}

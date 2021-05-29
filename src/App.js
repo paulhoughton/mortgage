@@ -57,127 +57,130 @@ export default () => {
                 </div>
             </nav>
             <div className="container-fluid">
-                <div className="col-md-8 col-sm-12">
-                    <div className="col-sm-4">
-                        <div>
-                            <h2>Initial</h2>
-
-                            <Tooltip title={<h6>Mortgage debt</h6>}>
-                                <label>
-                                    <AttachMoneyIcon className= {'material-icons'} />
-                                    Amount
-                                </label>
-                            </Tooltip>
-                            <input
-                                type="number"
-                                maxLength={7}
-                                value={initial}
-                                onChange={e => {
-                                    e.target.value = !!e.target.value && Math.abs(e.target.value) >= 0 ? Math.abs(e.target.value) : null;
-                                    setInitial(e.target.value)
-                                }}
-                            />
-
-                            <ClickAwayListener onClickAway={() => setOpenAmountTip(false)}>                             
-                                <Tooltip
-                                    PopperProps={{
-                                    disablePortal: true,
+                    <div className="col-sm-4 col-md-4 col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3>Initial</h3>
+                                </div>    
+                                <div class="panel-body">
+                                    <Tooltip title={<h6>Mortgage debt</h6>}>
+                                        <label>
+                                            <AttachMoneyIcon className= {'material-icons'} />
+                                            Amount
+                                        </label>
+                                    </Tooltip>
+                                    <input
+                                    type="number"
+                                    maxLength={7}
+                                    value={initial}
+                                    onChange={e => {
+                                        e.target.value = !!e.target.value && Math.abs(e.target.value) >= 0 ? Math.abs(e.target.value) : null;
+                                        setInitial(e.target.value)
                                     }}
-                                    onClose={() => setOpenAmountTip(false)}
-                                    open={openAmountTip}
-                                    disableFocusListener
-                                    disableHoverListener
-                                    disableTouchListener
-                                    title={<h6>This is the total amount you owe</h6>}>
-                                    <HelpIcon className= {'help-icon'} onClick={() => setOpenAmountTip(true)}/>
-                                </Tooltip>                      
-                            </ClickAwayListener>                   
-                        </div>
-                        <div>
-                        <Tooltip title={<h6>Mortgage term</h6>}>
-                            <label>
+                                /> 
+                                <ClickAwayListener onClickAway={() => setOpenAmountTip(false)}>                             
+                                    <Tooltip
+                                        PopperProps={{
+                                        disablePortal: true,
+                                        }}
+                                        onClose={() => setOpenAmountTip(false)}
+                                        open={openAmountTip}
+                                        disableFocusListener
+                                        disableHoverListener
+                                        disableTouchListener
+                                        title={<h6>This is the total amount you owe</h6>}>
+                                        <HelpIcon className= {'help-icon'} onClick={() => setOpenAmountTip(true)}/>
+                                    </Tooltip>                      
+                                </ClickAwayListener>   
+                                </div>
+                                <div class="panel-body">
+                                    <Tooltip title={<h6>Mortgage term</h6>}>
+                                        <label>
 
-                                {/* <EventIcon className= {'material-icons'} /> */}
-                                &nbsp;&nbsp;&nbsp;&nbsp;Years
+                                            {/* <EventIcon className= {'material-icons'} /> */}
+                                            &nbsp;&nbsp;&nbsp;&nbsp;Years
 
-                            </label>
-                        </Tooltip>
-                            
-                            <input
-                                //style={{width: "80px"}}
-                                //placeholder="Required"
-                                type="number"
-                                maxLength={2}
-                                value={years}
-                                onChange={e => {
-                                    e.target.value = !!e.target.value && Math.abs(e.target.value) >= 0 ? Math.abs(e.target.value) : null;
-                                    setYears(e.target.value)
-                                }}
-                            />
-                            <ClickAwayListener onClickAway={() => setOpenYearsTip(false)}>                             
-                                <Tooltip
-                                    PopperProps={{
-                                    disablePortal: true,
+                                        </label>
+                                    </Tooltip>
+                                        
+                                    <input
+                                    //style={{width: "80px"}}
+                                    //placeholder="Required"
+                                    type="number"
+                                    maxLength={2}
+                                    value={years}
+                                    onChange={e => {
+                                        e.target.value = !!e.target.value && Math.abs(e.target.value) >= 0 ? Math.abs(e.target.value) : null;
+                                        setYears(e.target.value)
                                     }}
-                                    onClose={() => setOpenYearsTip(false)}
-                                    open={openYearsTip}
-                                    disableFocusListener
-                                    disableHoverListener
-                                    disableTouchListener
-                                    title={<h6>This is the number of years over which you are repaying your mortgage</h6>}>
-                                    <HelpIcon className= {'help-icon'} onClick={() => setOpenYearsTip(true)}/>
-                                </Tooltip>                      
-                            </ClickAwayListener>
-                        </div>
-                        <div>
+                                    />
+                                    <ClickAwayListener onClickAway={() => setOpenYearsTip(false)}>                             
+                                        <Tooltip
+                                            PopperProps={{
+                                            disablePortal: true,
+                                            }}
+                                            onClose={() => setOpenYearsTip(false)}
+                                            open={openYearsTip}
+                                            disableFocusListener
+                                            disableHoverListener
+                                            disableTouchListener
+                                            title={<h6>This is the number of years over which you are repaying your mortgage</h6>}>
+                                            <HelpIcon className= {'help-icon'} onClick={() => setOpenYearsTip(true)}/>
+                                        </Tooltip>                      
+                                    </ClickAwayListener>
+                                </div>
+                                <div class="panel-body" >
 
-                        <Tooltip title={<h6>Interest rate</h6>}>
-                            <label> <span className='percentage'>% </span>Rate</label>
-                        </Tooltip>
+                                    <Tooltip title={<h6>Interest rate</h6>}>
+                                        <label> <span className='percentage'>% </span>Rate</label>
+                                    </Tooltip>
 
-                            <input
-                                //style={{width: "80px"}}
-                                //placeholder="Required"
-                                type="number"
-                                step={0.1}
-                                value={rate}
-                                onChange={e => {
-                                    e.target.value = !!e.target.value && Math.abs(e.target.value) >= 0 ? Math.abs(e.target.value) : null;
-                                    setRate(e.target.value)
-                                }}
-                            />
-                            <ClickAwayListener onClickAway={() => setOpenRateTip(false)}>                             
-                                <Tooltip
-                                    PopperProps={{
-                                    disablePortal: true,
+                                    <input
+                                        //style={{width: "80px"}}
+                                        //placeholder="Required"
+                                        type="number"
+                                        step={0.1}
+                                        value={rate}
+                                        onChange={e => {
+                                            e.target.value = !!e.target.value && Math.abs(e.target.value) >= 0 ? Math.abs(e.target.value) : null;
+                                            setRate(e.target.value)
+                                        }}
+                                    />
+                                    <ClickAwayListener onClickAway={() => setOpenRateTip(false)}>                             
+                                        <Tooltip
+                                            PopperProps={{
+                                            disablePortal: true,
+                                            }}
+                                            onClose={() => setOpenRateTip(false)}
+                                            open={openRateTip}
+                                            disableFocusListener
+                                            disableHoverListener
+                                            disableTouchListener
+                                            title={<h6>This is the annual mortgage interest rate</h6>}>
+                                            <HelpIcon className= {'help-icon'} onClick={() => setOpenRateTip(true)}/>
+                                        </Tooltip>                      
+                                    </ClickAwayListener>
+                                </div>
+
+                            </div>                              
+                        
+                            <div class="panel panel-default">
+                                <div class="panel-heading" >
+                            <h3>Overpayment</h3>
+                                 </div>
+                                <div className="panel-body"><Tooltip title={<h6>Regular monthly overpayment</h6>}>
+                                    <label>Monthly</label>
+                                </Tooltip>                           
+                                <input
+                                    type="number"
+                                    maxLength={5}
+                                    value={monthlyOverpayment}
+                                    onChange={e => {
+                                        e.target.value = !!e.target.value && Math.abs(e.target.value) >= 0 ? Math.abs(e.target.value) : null;
+                                        setMonthlyOverpayment(e.target.value)
                                     }}
-                                    onClose={() => setOpenRateTip(false)}
-                                    open={openRateTip}
-                                    disableFocusListener
-                                    disableHoverListener
-                                    disableTouchListener
-                                    title={<h6>This is the mortgage interest rate</h6>}>
-                                    <HelpIcon className= {'help-icon'} onClick={() => setOpenRateTip(true)}/>
-                                </Tooltip>                      
-                            </ClickAwayListener>
-                        </div>
-                    </div>
-                    <div className="col-sm-8">
-                        <div>
-                            <h2>Overpayment</h2>
-                            <Tooltip title={<h6>Regular monthly overpayment</h6>}>
-                                <label>Monthly</label>
-                            </Tooltip>                           
-                            <input
-                                type="number"
-                                maxLength={5}
-                                value={monthlyOverpayment}
-                                onChange={e => {
-                                    e.target.value = !!e.target.value && Math.abs(e.target.value) >= 0 ? Math.abs(e.target.value) : null;
-                                    setMonthlyOverpayment(e.target.value)
-                                }}
-                            />
-                            <ClickAwayListener onClickAway={() => setOpenMonthlyTip(false)}>                             
+                                />
+                                <ClickAwayListener onClickAway={() => setOpenMonthlyTip(false)}>                             
                                 <Tooltip
                                     PopperProps={{
                                     disablePortal: true,
@@ -191,8 +194,8 @@ export default () => {
                                     <HelpIcon className= {'help-icon'} onClick={() => setOpenMonthlyTip(true)}/>
                                 </Tooltip>                      
                             </ClickAwayListener>
-                        </div>
-                        <div>
+                           </div>
+                            <div class="panel-body">
                         <label>Year</label>
                         <label>Month</label>
                         <Tooltip title={<h6>Lump sum overpayment</h6>}>                                                  
@@ -215,7 +218,6 @@ export default () => {
                                     <HelpIcon className= {'material-icons'} onClick={() => setOpenSinglePayTip(true)}/>
                                 </Tooltip>                      
                             </ClickAwayListener>
-                        </div>
                         {overpayments.map(({year, month, amount}, i) => (
                             <div key={i}>
                                 <input
@@ -258,18 +260,21 @@ export default () => {
                                 )}
                             </div>
                         ))}
+                            </div>
+                            </div>
+
                     </div>
-                    <div className="col-sm-12">
-                        <h2>
+                    
+                    <div className="col-sm-5 col-md-5 col-lg-5">
+                        <h3>
                             Monthly Payment
                             <span className="money">
-                {(+monthlyOverpayment + monthlyPayment).toFixed(2)}
-              </span>
-                        </h2>
+                                {(+monthlyOverpayment + monthlyPayment).toFixed(2)}
+                            </span>
+                        </h3>
                         <Chart payments={payments}/>
                     </div>
-                </div>
-                <Table className="col-sm-4" payments={payments}/>
+                <Table className="col-sm-3 col-md-3 col-lg-3" payments={payments}/>
             </div>
         </div>
     );
