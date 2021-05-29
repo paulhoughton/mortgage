@@ -64,7 +64,10 @@ export default () => {
     const [valueListen, setValueListen] = useState('');
     const { listen, listening, stop } = useSpeechRecognition({
         onResult: (result) => {
-            setValueListen(result);   
+            console.log(result);
+            if (!isNaN(result) ) {
+                setValueListen(result);
+            }   
         },
 
         onEnd: () => {
@@ -76,7 +79,6 @@ export default () => {
 
     // on updating checked state
     useEffect(() => {
-        console.log(state);
         if (state.checked) {
             setSpeakNumber(speakNumber +1); 
         }
@@ -89,7 +91,6 @@ export default () => {
 
     // on updating speak number, speak
     useEffect( () => {
-        console.log(speakNumber);
         if (speakNumber === 1) {
             speak( {text:"Please state your initial amount"} );
             setInputFieldNumber('1'); 
@@ -117,7 +118,6 @@ export default () => {
 
     // on updating listen value, set input fields
     useEffect( () => {
-        console.log(valueListen);
         if (inputFieldNumber === '1') {
             setInitial(parseFloat(valueListen.replace(/,/g, ''))); 
         } else if (inputFieldNumber === '2') {
@@ -152,11 +152,11 @@ export default () => {
             </nav>
             <div className="container-fluid">
                     <div className="col-sm-4 col-md-4 col-lg-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
+                            <div className="panel panel-default">
+                                <div className="panel-heading">
                                     <h3>Initial</h3>
                                 </div>    
-                                <div class="panel-body">
+                                <div className="panel-body">
                                     <Tooltip title={<h6>Mortgage debt</h6>}>
                                         <label>
                                             <AttachMoneyIcon className= {'material-icons'} />
@@ -187,7 +187,7 @@ export default () => {
                                     </Tooltip>                      
                                 </ClickAwayListener>   
                                 </div>
-                                <div class="panel-body">
+                                <div className="panel-body">
                                     <Tooltip title={<h6>Mortgage term</h6>}>
                                         <label>
 
@@ -223,7 +223,7 @@ export default () => {
                                         </Tooltip>                      
                                     </ClickAwayListener>
                                 </div>
-                                <div class="panel-body" >
+                                <div className="panel-body" >
 
                                     <Tooltip title={<h6>Interest rate</h6>}>
                                         <label> <span className='percentage'>% </span>Rate</label>
@@ -258,8 +258,8 @@ export default () => {
 
                             </div>                              
                         
-                            <div class="panel panel-default">
-                                <div class="panel-heading" >
+                            <div className="panel panel-default">
+                                <div className="panel-heading" >
                             <h3>Overpayment</h3>
                                  </div>
                                 <div className="panel-body"><Tooltip title={<h6>Regular monthly overpayment</h6>}>
@@ -289,7 +289,7 @@ export default () => {
                                 </Tooltip>                      
                             </ClickAwayListener>
                            </div>
-                            <div class="panel-body">
+                            <div className="panel-body">
                         <label>Year</label>
                         <label>Month</label>
                         <Tooltip title={<h6>Lump sum overpayment</h6>}>                                                  
