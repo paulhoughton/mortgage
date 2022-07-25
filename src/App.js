@@ -55,9 +55,17 @@ export default () => {
               <label>Years</label>
               <input
                 type="number"
-                maxLength={2}
+                maxLength={1}
                 value={years}
-                onChange={e => setYears(e.target.value)}
+                onChange={(e) => {
+                  let tempValue = e.target.value;
+                  if(tempValue<41){
+                    setYears(tempValue)
+                  }
+                  else{
+                    setYears('40')
+                  }
+                  }}
               />
             </div>
             <div>

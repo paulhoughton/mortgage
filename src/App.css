@@ -39,3 +39,10 @@ tfoot tr:first-child {
 .baseline {
   stroke-dasharray: 4, 4;
 }
+tr:nth-child(even){background-color: #a1c5e5;}
+
+table{
+  border: 1px #428bca solid;
+  border-collapse: collapse;
+}
+
