@@ -24,13 +24,13 @@ export default () => {
       )
     );
 
-  const { monthlyPayment, payments } = calculate(
-    +initial,
-    +years,
-    +rate,
-    +monthlyOverpayment,
+  const { monthlyPayment, payments } = calculate({
+    initial: +initial,
+    years: +years,
+    rate: +rate,
+    monthlyOverpayment: +monthlyOverpayment,
     overpayments
-  );
+  });
 
   return (
     <div>
