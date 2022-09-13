@@ -1,10 +1,10 @@
-export default function calculatePayments(
+export default function calculatePayments({
   initial,
   years,
   rate,
   monthlyOverpayment,
   overpayments = []
-) {
+}) {
   const monthlyRatePct = rate / 1200;
   const monthlyPayment =
     monthlyRatePct === 0
