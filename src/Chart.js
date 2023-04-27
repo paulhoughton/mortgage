@@ -53,7 +53,7 @@ export default ({ payments }) => {
     <svg
       ref={chart}
       height="100%"
-      width="100%"
+      width="90%"
       viewBox={`0 0 ${fullWidth} ${fullHeight}`}
     >
       <g transform={`translate(${margin.left},${margin.top})`}>

@@ -39,3 +39,39 @@ tfoot tr:first-child {
 .baseline {
   stroke-dasharray: 4, 4;
 }
+
+.range{
+  -webkit-appearance: none;  
+  appearance: none;
+  width: 66% !important; 
+  height: 2px;
+  background: #d3d3d3; 
+  outline: none;
+  opacity: 0.8; 
+  -webkit-transition: .2s; 
+  transition: opacity .2s;
+  max-width: 240px;
+  margin: 3px 0px;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 17px; 
+  height: 17px; 
+  border-radius: 50%;
+  background: #428bca; 
+  cursor: pointer; 
+}
+
+.range-div{
+  padding-bottom: 7px
+}
+
+.range-div span{
+  margin-left: 7%;
+}
+
+/* .table{
+  width: 70% !important;
+} */
