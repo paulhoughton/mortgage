@@ -25,71 +25,7 @@ export default ({ payments, className }) => {
     );
 
 
-    
-    // let res = output
-    // res.rows.forEach(item => {
-    //   item.filter(data => {
-    //     if(data === parseInt(searchTerm)){
-    //       console.log("matched", data)
-    //       return data
-    //     }
-    //   })
-    // })
-
-    // console.log(searchTerm)
-    
-  //   output = output.filter(
-  //   (data) =>
-  //     data.years
-  //       .toString()
-  //       .toLowerCase()
-  //       .includes(searchTerm.toLowerCase()) ||
-  //     data.interest
-  //       .toString()
-  //       .toLowerCase()
-  //       .includes(searchTerm.toLowerCase()) ||
-  //     data.overpayment
-  //       .toString()
-  //       .toLowerCase()
-  //       .includes(searchTerm.toLowerCase()) ||
-  //     data.balance
-  //       .toString()
-  //       .toLowerCase()
-  //       .includes(searchTerm.toLowerCase())
-  // );
-
   return (
-    
-    // <table className={className}>
-    //   <thead>
-    //     <tr>
-    //       <th>Years</th>
-    //       <th>Interest</th>
-    //       <th>Overpayment</th>
-    //       <th>Balance</th>
-    //     </tr>
-    //   </thead>
-    //   <tbody>
-    //     {output.rows.map((row, index) => (
-    //       <tr key={index}>
-    //         {row.map((d, i) => (
-    //           <td key={i}>{d.toLocaleString()}</td>
-    //         ))}
-    //       </tr>
-    //     ))}
-    //   </tbody>
-    //   <tfoot>
-    //     <tr>
-    //       <td colSpan={2}>
-    //         {Math.round(output.interestTotal).toLocaleString()}
-    //       </td>
-    //       <td>{Math.round(output.overpaymentTotal).toLocaleString()}</td>
-    //       <td />
-    //     </tr>
-    //   </tfoot>
-    // </table>
-
-
  <>
     <InputGroup className="mb-3" style={{"width" : "40rem"}}>
         <Form.Control
