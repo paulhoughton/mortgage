@@ -23,6 +23,7 @@ td {
 .money {
   padding-left: 1rem;
   color: #428bca;
+  font-weight: 900;
 }
 
 tbody,
@@ -38,4 +39,19 @@ tfoot tr:first-child {
 
 .baseline {
   stroke-dasharray: 4, 4;
+}
+
+.input {
+  border: 0.1px solid transparent;
+  border-radius: 6px;
+  padding: 2px 4px;
+  background-color: rgb(240, 240, 240);
+  font-weight: 900;
+  color: rgb(81, 81, 81);
+  outline: none;
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: 600;
 }
